@@ -4,6 +4,8 @@ import Home from './screens/Home';
 import PostStudy from "./screens/PostStudy";
 import Study from './screens/Study';
 import Profile from './screens/Profile';
+import PostStudyResults from './screens/PostStudyResults';
+import ReportUpdate from "./screens/ReportUpdate";
 
 function App() {
   const loggedIn = true;
@@ -15,6 +17,8 @@ function App() {
           <Route exact path="/postStudy" element={<PostStudy/>} />
           <Route exact path="/study/:studyID" element={<Study/>} />
           <Route exact path="/profile/:userID" element={<Profile/>} />
+          <Route exact path="/postResults/:studyID" element={<PostStudyResults/>} />
+          <Route exact path="/postUpdate/:studyID" element={<ReportUpdate/>} />
         </Routes>) : (
         <Routes>
           <Route exact path="/" element={<Login/>} />
