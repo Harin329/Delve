@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Layout, Input, Space, Switch, Row, Col, Upload, Button } from 'antd';
 
-function PostStudy() {
+function PostStudyResults() {
     const { TextArea } = Input;
 
     const imageUrl = ""
@@ -27,19 +27,40 @@ function PostStudy() {
                     <Switch checkedChildren="Simplifed" unCheckedChildren="Scientific" defaultChecked />
                 </Row>
                 <Row>
-                    Description
+                    Abstract
                 </Row>
                 <Row>
                     <TextArea rows={4} />
                 </Row>
                 <Row>
-                    Direction
+                    Introduction
                 </Row>
                 <Row>
                     <TextArea rows={4} />
                 </Row>
                 <Row>
-                    Requirements
+                    Materials and Procedures
+                </Row>
+                <Row>
+                    <TextArea rows={4} />
+                </Row>
+                <Row>
+                    Discussion
+                </Row>
+                <Row>
+                    <TextArea rows={4} />
+                </Row>
+                <Row>
+                    Conclusion
+                </Row>
+                <Row>
+                    <TextArea rows={4} />
+                </Row>
+                <Row>
+                    Implications
+                </Row>
+                <Row>
+                    <TextArea rows={4} />
                 </Row>
                 <Row>
                     Images
@@ -58,7 +79,7 @@ function PostStudy() {
                 </Row>
                 <Row justify='end'>
                     <Col>
-                        <Button type="primary">Join</Button>
+                        <Button type="primary">Update</Button>
                     </Col>
                 </Row>
             </Space>
@@ -66,4 +87,4 @@ function PostStudy() {
     );
 }
 
-export default PostStudy;
+export default PostStudyResults;

@@ -1,168 +1,132 @@
 import React from 'react';
 import '../App.css';
-import { Layout, Input, List, Card, Row } from 'antd';
+import { Layout, Input, Space, Switch, Row, Col, Upload, Button, Typography } from 'antd';
 
 function Study() {
-    const { Header, Sider, Content } = Layout;
-    const { Search } = Input;
+    const { TextArea } = Input;
+    const completed = true;
+
+    const imageUrl = ""
+    const uploadButton = (
+        <div>
+            {/* {loading ? <LoadingOutlined /> : <PlusOutlined />} */}
+            <div style={{ marginTop: 8 }}>Upload</div>
+        </div>
+    );
 
     const onSearch = value => console.log(value);
 
-    const data = [
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        }
-    ];
+    if (completed) {
+        return (
+            <Layout className='App' style={{ backgroundColor: 'white' }}>
+                <Row style={{ backgroundColor: "blue", height: '100vh' }}>
+                    <Row>
+                        <Typography>Title</Typography>
+                    </Row>
+                    <Row>
+                        <Typography>Researcher Name</Typography>
+                    </Row>
+                </Row>
+                <Space direction="vertical" style={{ padding: '5%', paddingLeft: '10%', paddingRight: '10%' }}>
+                    <Row>
+                        <Switch checkedChildren="Simplifed" unCheckedChildren="Scientific" defaultChecked />
+                    </Row>
+                    <Row>
+                        Abstract
+                    </Row>
+                    <Row>
+                        <TextArea rows={4} />
+                    </Row>
+                    <Row>
+                        Introduction
+                    </Row>
+                    <Row>
+                        <TextArea rows={4} />
+                    </Row>
+                    <Row>
+                        Materials and Methods
+                    </Row>
+                    <Row>
+                        Discussion
+                    </Row>
+                    <Row>
+                        Conclusion
+                    </Row>
+                    <Row>
+                        Implications
+                    </Row>
+                    <Row>
+                        Images
+                    </Row>
+                    <Row>
+                        <Upload
+                            name="avatar"
+                            listType="picture-card"
+                            className="avatar-uploader"
+                            showUploadList={false}
+                            action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                        // onChange={this.handleChange}
+                        >
+                            {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                        </Upload>
+                    </Row>
+                    <Row>
+                        Related
+                    </Row>
+                </Space>
+            </Layout>)
+    }
 
     return (
-        <Layout className='App'>
-            <Sider className='Sider' style={{ backgroundColor: 'white' }}>
-                <Row align='middle' justify='center'>
-                    Delve
+        <Layout className='App' style={{ backgroundColor: 'white' }}>
+            <Row style={{ backgroundColor: "blue", height: '100vh' }}>
+                <Row>
+                    <Typography>Title</Typography>
                 </Row>
                 <Row>
-                    <Row>
-                        Profile
-                    </Row>
-                    <Row>
-                        Post a Study
-                    </Row>
-                    <Row>
-                        Post Results
-                    </Row>
-
-
+                    <Typography>Researcher Name</Typography>
+                </Row>
+            </Row>
+            <Space direction="vertical" style={{ padding: '5%', paddingLeft: '10%', paddingRight: '10%' }}>
+                <Row>
+                    <Switch checkedChildren="Simplifed" unCheckedChildren="Scientific" defaultChecked />
                 </Row>
                 <Row>
-                    <Row>
-                        All
-                    </Row>
-                    <Row>
-                        Clinical Trials
-                    </Row>
-                    <Row>
-                        Environmental
-                    </Row>
-                    <Row>
-                        Civic
-                    </Row>
-                    <Row>
-                        Psychology
-                    </Row>
-                    <Row>
-                        Science
-                    </Row>
+                    Description
                 </Row>
-            </Sider>
-            <Layout>
-                <Header>
-                    <Row align='middle' justify='center'>
-                        <Search placeholder="input search text" onSearch={onSearch} style={{ width: '100%' }} />
-                    </Row>
-                </Header>
-                <Content>
-                    <Row>
-                        Filter
-                    </Row>
-                    <List
-                        style={{ padding: '20px' }}
-                        grid={{ gutter: 16, column: 4 }}
-                        dataSource={data}
-                        renderItem={item => (
-                            <List.Item>
-                                <Card title={item.title}>Card content</Card>
-                            </List.Item>
-                        )}
-                    />
-                </Content>
-            </Layout>
+                <Row>
+                    <TextArea rows={4} />
+                </Row>
+                <Row>
+                    Direction
+                </Row>
+                <Row>
+                    <TextArea rows={4} />
+                </Row>
+                <Row>
+                    Requirements
+                </Row>
+                <Row>
+                    Images
+                </Row>
+                <Row>
+                    <Upload
+                        name="avatar"
+                        listType="picture-card"
+                        className="avatar-uploader"
+                        showUploadList={false}
+                        action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+                    // onChange={this.handleChange}
+                    >
+                        {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                    </Upload>
+                </Row>
+                <Row justify='end'>
+                    <Col>
+                        <Button type="primary">Join</Button>
+                    </Col>
+                </Row>
+            </Space>
         </Layout>
     );
 }

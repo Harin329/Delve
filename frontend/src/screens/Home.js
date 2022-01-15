@@ -117,8 +117,6 @@ function Home() {
                     <Row>
                         Post Results
                     </Row>
-
-
                 </Row>
                 <Row>
                     <Row>
