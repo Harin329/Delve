@@ -28,7 +28,7 @@ function Login() {
 
       > 
          <Typography>
-                <Title> Sign Up</Title>
+                <Title>Log In</Title>
           </Typography> 
 
           <div style={{
@@ -45,17 +45,17 @@ function Login() {
               onFinishFailed={onFinishFailed}
               autoComplete="off"
             >
-              <Form.Item 
-                name="Full Name"
-                rules={[{ required: true, message: 'Please input your Full Name!'}]}
-                style={{paddingTop: 30,}}
-              >
-                <Input placeholder="Full Name"/>
-              </Form.Item>
 
               <Form.Item
                 name="Email"
-                rules={[{ required: true, message: 'Please input your Email!' }]}
+                rules={[{
+                    type: 'email',
+                    message: 'The input is not valid E-mail!',
+                  },
+                  {
+                    required: true,
+                    message: 'Please input your E-mail!',
+                  },]}
               >
                 <Input placeholder="Email"/>
               </Form.Item>
@@ -65,14 +65,6 @@ function Login() {
                 rules={[{ required: true, message: 'Please input your Password!' }]}
               >
                 <Input placeholder="Password"/>
-              </Form.Item>
-
-              <Form.Item
-                name="Confirm Password"
-                placeholder="Confirm Password"
-                rules={[{ required: true, message: 'Please input your username!' }]}
-              >
-                <Input placeholder="Confirm Password"/>
               </Form.Item>
 
               <Form.Item wrapperCol={{ offset: 18, span: 8}}>
