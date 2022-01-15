@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from app.route import user
+from app.route import user, study
 from bson import ObjectId
 from app.indexer.tools import connect_mongo_db
 
@@ -14,6 +14,7 @@ app.add_middleware(
 )
 
 app.include_router(user.router)
+app.include_router(study.router)
 
 db = connect_mongo_db()
 
