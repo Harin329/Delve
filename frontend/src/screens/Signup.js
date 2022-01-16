@@ -6,7 +6,6 @@ import {
   Button,
   Typography
 } from 'antd';
-import '../styles/onboard.css';
 
 
 const { Title, Paragraph, Text, Link } = Typography;
