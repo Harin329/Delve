@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 import logo from '../assets/logocolor.png'
+import background from '../assets/landingpage.png'
 
 
 const { Title, Paragraph, Text, Link } = Typography;
@@ -23,41 +24,40 @@ function LandingPage() {
     }
 
     return (
-    <div class="diagonalcontainer">
+    <div style={{
+        background: `url("${background}")`,
+        width: '100vw',
+        height: '100vh',
+    }}>
         <div style={{
+            position: 'absolute',
+            left: 200,
+            top: 200,
             display: 'flex',
             flexDirection: 'column',
-            justifyContent: 'left',
-            width: "34%",
-            marginLeft: 130,
-            marginTop: 110,
         }}>
-
             <img 
-                src={logo} 
-                alt="my image"
-                style={{
-                    paddingTop: "20%",
-                    height: 350,
-                    width: 350,
-                    objectFit: 'contain'
-                }}/>
-                <Title style={{
+            src={logo} 
+            alt="my image"
+            style={{
+                height: 350,
+                width: 350,
+                objectFit: 'contain',
+            }}/>
+            <Title style={{
+                    marginTop: "-8%",
                     fontSize: 40,
-                    width: "100%" 
+                    width: "55%" 
                 }}>Jump into, participate, and explore the world of information.</Title>
-            <div></div>
-            <button type="primary" htmlType="submit" shape="round" size={'small'}
+            <div>
+            <Button shape="round" size={'small'}
                 onClick={signupnav}
                 style={{
-                    
-                    alignSelf: 'center',
-                    borderRadius: 50,
                   marginTop: 50,
                   paddingRight: 80,
                   paddingLeft: 80,
-                  paddingTop: 11,
-                  paddingBottom: 13,
+                  paddingTop: 8,
+                  paddingBottom: 40,
                   fontWeight: 700,
                   fontSize: 20,
                   color: 'white',
@@ -65,20 +65,19 @@ function LandingPage() {
                   borderColor: "#528B6E",
                 }}>
                 Join In
-            </button>
+            </Button>
+            </div>
             <text
                 onClick={loginnav}
                 style={{
                 marginTop: 40,
-                fontSize: 20,
-                alignSelf: 'center',
+                fontSize: 22,
                 color: 'black',
-                fontWeight: 400,
+                fontWeight: 600,
             }}> Already have an account? Log in</text>
-            <div></div>
         </div>
-        <div></div>
-      </div>
+       
+    </div>
     )
 }
 

@@ -50,7 +50,7 @@ function App () {
 
   return (
     <Router >
-      {user ? (
+      {false ? (
         <Routes>
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/postStudy" element={<PostStudy/>} />
@@ -62,6 +62,8 @@ function App () {
         <Routes>
           <Route exact path="/" element={<LandingPage/>} />
           <Route exact path="/signup" element={<Signup/>} />
+          <Route exact path="/login" element={<Login/>} />
+          <Route exact path="/ChoiceOnboard" element={<ChoiceOnboard/>} />
         </Routes>
       )}
     </Router>
