@@ -82,6 +82,7 @@ function PostStudy() {
                     });
                 })
             })
+            window.location.href = '/study/' + studyID;
         } catch (e) {
             console.log(e);
         }
