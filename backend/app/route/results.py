@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 from typing import List, Optional
 from app.indexer.tools import connect_mongo_db
-from app.indexer.results import insert_results, update_results
+from app.indexer.results import insert_results, update_results, fetch_results_by_study_id
 from app.models.results_model import ResultsModel
 
 default_results = {
@@ -41,6 +41,16 @@ async def put_results(study_id: str, new_results: dict = default_results):
     try:
         db = connect_mongo_db()
         res = update_results(db, study_id, jsonable_encoder(new_results))
+        return res
+    except Exception as e:
+        logging.error(e)
+        return "Error with {}".format(e), 400
+
+@router.get("/{study_id}", response_model=ResultsModel)
+async def get_results_by_study_id(study_id: str):
+    try:
+        db = connect_mongo_db()
+        res = fetch_results_by_study_id(db, study_id)
         return res
     except Exception as e:
         logging.error(e)
