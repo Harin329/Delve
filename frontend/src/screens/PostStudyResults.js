@@ -53,7 +53,7 @@ function PostStudyResults() {
                 },
                 data: 
                 {
-                    "study_id": "abcdefg",
+                    "study_id": studyID,
                     "title": studyTitle,
                     "researchers": [
                         auth.currentUser.uid,
@@ -68,18 +68,20 @@ function PostStudyResults() {
                   }
             };
             axios(config).then((res) => {
+                const promise = [];
                 image.forEach((im) => {
                     console.log(im);
                     if (im == null) {
                         return
                     }
                     const storageRef = ref(storage, `StudyResult/${studyID}/` + im.name)
-                    uploadBytes(storageRef, im).then((snapshot) => {
-                        console.log(snapshot)
-                    });
+                    promise.push(uploadBytes(storageRef, im))
+                })
+
+                Promise.all(promise).then(() => {
+                    window.location.href = '/study/' + studyID;
                 })
             })
-            window.location.href = '/study/' + studyID;
         } catch (e) {
             console.log(e);
         }

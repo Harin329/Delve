@@ -63,6 +63,7 @@ function PostStudy() {
                     "max_participants": 1000,
                     "contact": auth.currentUser.email,
                     "description": studyDescription,
+                    "direction": studyDirection,
                     "requirements": requirements.join(','),
                     "categories": [
                         studyCategory
@@ -71,18 +72,22 @@ function PostStudy() {
                 }
             };
             axios(config).then((res) => {
+                const promise = [];
                 image.forEach((im) => {
                     console.log(im);
                     if (im == null) {
                         return
                     }
                     const storageRef = ref(storage, `Study/${studyID}/` + im.name)
-                    uploadBytes(storageRef, im).then((snapshot) => {
-                        console.log(snapshot)
-                    });
+                    promise.push(uploadBytes(storageRef, im))
                 })
+
+                Promise.all(promise).then(() => {
+                    window.location.href = '/study/' + studyID;
+                })
+            }).catch((err) => {
+                console.log(err);
             })
-            window.location.href = '/study/' + studyID;
         } catch (e) {
             console.log(e);
         }
