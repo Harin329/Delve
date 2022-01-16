@@ -7,8 +7,10 @@ import {
   Typography
 } from 'antd';
 
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const { Title, Paragraph, Text, Link } = Typography;
+
 
 const formItemLayout = {
   labelCol: {
@@ -44,12 +46,13 @@ const tailFormItemLayout = {
 
 function Signup () {
 
+  const auth = getAuth();
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
+    createUserWithEmailAndPassword(auth, values.email, values.password).then((user) => {console.log(user.user.uid)})
   };
-
 
   return (
     <div style={{
@@ -61,7 +64,7 @@ function Signup () {
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'pink',
+        backgroundColor: '#528C6F',
         width: "50%",
         alignItems: 'center',
         justifyContent: 'center',
@@ -96,12 +99,12 @@ function Signup () {
           scrollToFirstError
         >
           <Form.Item
-            name="nickname"
+            name="fullname"
             tooltip="What do you want others to call you?"
             rules={[
               {
                 required: true,
-                message: 'Please input your nickname!',
+                message: 'Please input your fullname!',
                 whitespace: true,
               },
             ]}
@@ -171,7 +174,7 @@ function Signup () {
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
-            <Button type="primary" shape="round" size={'large'}
+            <Button type="primary" htmlType="submit" shape="round" size={'large'}
                 style={{
                     marginTop: 30,
                     paddingRight: 60,
