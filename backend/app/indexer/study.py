@@ -63,7 +63,7 @@ def insert_update(db, study_id, update):
         print("MongoDB Error: ", "insert_update")
         logging.error(e)
 
-def fetch_open_studies(db, category_ids=None):
+def fetch_open_studies(db, category_id=None):
     try:
         open_studies = []
         open_studies_cursor = db["studies"].find(
@@ -74,10 +74,10 @@ def fetch_open_studies(db, category_ids=None):
         )
         
         for open_study in open_studies_cursor:
-            if category_ids:
+            if category_id and category_id != "all":
                 let_through = False
-                for category_id in open_study["categories"]:
-                    if category_id in category_ids:
+                for category in open_study["categories"]:
+                    if category_id == category:
                         let_through = True
                 
                 if let_through:

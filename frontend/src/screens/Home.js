@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import { Layout, Input, List, Card, Row, Divider, Anchor, Col } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -6,107 +6,38 @@ import Logo from '../assets/logo.png'
 import SearchImg from '../assets/search.png'
 import Filter from '../assets/filter.png'
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 function Home() {
     const { Content } = Layout;
 
     const [userResearcher, setUserResearcher] = useState(true);
     const [currentSection, setCurrentSection] = useState('All');
+    const [data, setData] = useState([]);
 
     const onSearch = value => console.log(value);
 
-    const data = [
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
-        },
-        {
-            title: 'Title 1',
-        },
-        {
-            title: 'Title 2',
-        },
-        {
-            title: 'Title 3',
-        },
-        {
-            title: 'Title 4',
+    useEffect(() => {
+        getOpenStudies(currentSection);
+    }, [currentSection]);
+
+    const getOpenStudies = (currentSection) => {
+        try {
+            const config = {
+                method: 'get',
+                url: 'http://localhost:8000/study/open/' + currentSection.toLowerCase(),
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+            };
+            axios(config).then((res) => {
+                console.log(res.data);
+                setData([...res.data]);
+            });
+        } catch (e) {
+            console.log(e);
         }
-    ];
+    }
 
     function heightCalc(index) {
         if (index % 9 == 0) {
@@ -175,8 +106,8 @@ function Home() {
                 }}>
                     All
                 </Row>
-                <Row className={currentSection === 'Clinical Trials' ? 'sideButtons' : 'sideButtonsNormal'} onClick={() => {
-                    setCurrentSection('Clinical Trials');
+                <Row className={currentSection === 'Clinical' ? 'sideButtons' : 'sideButtonsNormal'} onClick={() => {
+                    setCurrentSection('Clinical');
                 }}>
                     Clinical Trials
                 </Row>
@@ -236,7 +167,7 @@ function Home() {
                         >
                             <List
                                 grid={{ column: 3 }}
-                                dataSource={data}
+                                dataSource={[...data]}
                                 renderItem={(item, index) => (
                                     <div style={{ padding: 5, height: heightCalc(index), marginTop: topCalc(index), borderRadius: '20px', position: 'relative' }}>
                                         <img src={Filter} style={{backgroundColor: 'green', width: '100%', height: '100%', borderRadius: '20px'}}></img>

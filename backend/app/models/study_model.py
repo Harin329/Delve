@@ -12,6 +12,7 @@ class StudyModel(BaseModel):
     max_participants: int = Field(...)
     contact: EmailStr = Field(...)
     description: str = Field(...)
+    direction: str = Field(...)
     requirements: str = Field(...)
     categories: List[str] = Field(...)
     status: str = Field(...)
@@ -28,6 +29,7 @@ class StudyModel(BaseModel):
                 "participants": ["Charlie"],
                 "max_participants": 50,
                 "contact": "researcher@test.com",
+                "direction": "To the moon!",
                 "description": "We are seeking 50 participants for a trial of Y to determine its effects on Z",
                 "requirements": "Must be between 18-55 years old",
                 "categories": ["clinical"],
