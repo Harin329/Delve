@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 from typing import List, Optional
 from app.indexer.tools import connect_mongo_db
-from app.indexer.study import insert_study, insert_update, add_user_to_study, fetch_open_studies
+from app.indexer.study import insert_study, insert_update, add_user_to_study, fetch_studies_for_user, fetch_open_studies
 from app.models.study_model import StudyModel
 from app.models.update_model import UpdateModel
 
@@ -38,6 +38,16 @@ async def post_study(study: dict = default_study):
     try:
         db = connect_mongo_db()
         res = insert_study(db, jsonable_encoder(study))
+        return res
+    except Exception as e:
+        logging.error(e)
+        return "Error with {}".format(e), 400
+
+@router.get("/", response_model=List[StudyModel])
+async def get_all_studies_for_user(user_id: str, is_researcher: bool):
+    try:
+        db = connect_mongo_db()
+        res = fetch_studies_for_user(db, user_id, is_researcher)
         return res
     except Exception as e:
         logging.error(e)
