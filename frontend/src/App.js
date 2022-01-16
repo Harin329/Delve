@@ -6,6 +6,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 
 import Login from './screens/Login';
+import LandingPage from "./screens/LandingPage";
+import ChoiceOnboard from "./screens/ChoiceOnboard";
 import Signup from './screens/Signup';
 import Home from './screens/Home';
 import PostStudy from "./screens/PostStudy";
@@ -58,7 +60,7 @@ function App () {
           <Route exact path="/postUpdate/:studyID" element={<ReportUpdate/>} />
         </Routes>) : (
         <Routes>
-          <Route exact path="/" element={<Signup/>} />
+          <Route exact path="/" element={<LandingPage/>} />
           <Route exact path="/signup" element={<Signup/>} />
         </Routes>
       )}

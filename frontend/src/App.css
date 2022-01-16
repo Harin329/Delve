@@ -112,3 +112,23 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
   padding-left: 12px;
   opacity: 1;
 }
+
+.diagonalcontainer {
+  width: 100vw;
+  height: 100vh;
+}
+
+.diagonalcontainer > * {
+  height: 100%;
+  background: white;
+}
+
+.diagonalcontainer :last-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #528B6E;
+  -webkit-clip-path: polygon(43% 0, 100% 0%, 100% 100%, 70% 100%);
+  clip-path: polygon(43% 0, 100% 0%, 100% 100%, 70% 100%);
+}
