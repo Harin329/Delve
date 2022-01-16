@@ -6,8 +6,10 @@ import Logo from '../assets/logo.png'
 import SearchImg from '../assets/search.png'
 import Filter from '../assets/filter.png'
 import { Link } from 'react-router-dom';
-import axios from 'axios';
+import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { getDownloadURL, getStorage, list, ref } from "firebase/storage";
+import axios from 'axios';
 
 function Home() {
     const { Content } = Layout;
@@ -15,13 +17,33 @@ function Home() {
     const [userResearcher, setUserResearcher] = useState(true);
     const [currentSection, setCurrentSection] = useState('All');
     const [data, setData] = useState([]);
+    const [studyImages, setStudyImages] = useState([]);
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyCfzhkWjKe73Eb8Ojovc75dghbsDy-DU-E",
+        authDomain: "nwhacks2022.firebaseapp.com",
+        projectId: "nwhacks2022",
+        storageBucket: "nwhacks2022.appspot.com",
+        messagingSenderId: "1086232361678",
+        appId: "1:1086232361678:web:347db725dcfd977a1eae9f"
+    };
+
+    const app = initializeApp(firebaseConfig);
+
+    const storage = getStorage(app);
+    const auth = getAuth();
+    const storageRef = ref(storage, `User/${auth.currentUser.uid}.png`);
+    const profileImageURL = getDownloadURL(storageRef);
 
     const onSearch = value => console.log(value);
-    const auth = getAuth();
 
     useEffect(() => {
         getOpenStudies(currentSection);
     }, [currentSection]);
+
+    useEffect(() => {
+        getStudyImages();
+    }, [data]);
 
     const getOpenStudies = (currentSection) => {
         try {
@@ -39,6 +61,29 @@ function Home() {
         } catch (e) {
             console.log(e);
         }
+    }
+
+    const getStudyImages = () => {
+        data.forEach((item) =>  {
+            const listRef = ref(storage, `Study/${item.study_id}`);
+            list(listRef, { maxResults: 1 }).then((res) => {
+                if (res.items.length > 0) {
+                    getDownloadURL(res.items[0]).then((url) => {
+                        studyImages.push(url);
+                        setStudyImages([...studyImages, url]);
+                    })
+                } else {
+                    setStudyImages([...studyImages, '']);
+                }
+            })
+        });
+
+    }
+
+    function imgError(ev) {
+        ev.target.onerror = "";
+        ev.target.src = "http://placekitten.com/100/100";
+        return true;
     }
 
     function heightCalc(index) {
@@ -145,8 +190,9 @@ function Home() {
                                 objectFit: 'contain',
                             }} />} style={{ backgroundColor: '#E1E1E1', borderRadius: 20, width: '95%' }} />
                         <img
-                            src={SearchImg}
+                            src={profileImageURL}
                             alt="Search"
+                            onError={imgError}
                             style={{
                                 width: '50px',
                                 backgroundColor: '#528C6F',
@@ -172,7 +218,7 @@ function Home() {
                                 dataSource={[...data]}
                                 renderItem={(item, index) => (
                                     <div style={{ padding: 5, height: heightCalc(index), marginTop: topCalc(index), borderRadius: '20px', position: 'relative' }}>
-                                        <img src={Filter} style={{backgroundColor: 'green', width: '100%', height: '100%', borderRadius: '20px'}}></img>
+                                        <img src={studyImages[index]} style={{backgroundColor: 'green', width: '100%', height: '100%', borderRadius: '20px'}}></img>
                                         <h1 style={{position: 'absolute', zIndex: 5, bottom: 10, left: 20}}>{item.title}</h1>
                                     </div>
                                 )}
