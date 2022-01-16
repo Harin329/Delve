@@ -400,6 +400,12 @@ function Study() {
                     })}
                 </Row>
                 <Row justify='center' style={{ marginTop: 30 }}>
+                {researchers.includes(auth.currentUser.uid) ? (
+                        <Col span={2} style={{ marginRight: 20 }}>
+                            <Button type="primary" style={{ backgroundColor: '#528C6F', width: '100%', borderRadius: 20 }} onClick={() => {
+                                window.location.href = '/monitor/' + studyID;
+                            }}>Monitor</Button>
+                        </Col>) : null}
                     {researchers.includes(auth.currentUser.uid) ? (
                         <Col span={2} style={{ marginRight: 20 }}>
                             <Button type="primary" style={{ backgroundColor: '#528C6F', width: '100%', borderRadius: 20 }} onClick={() => {

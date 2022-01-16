@@ -89,3 +89,21 @@ def fetch_open_studies(db, category_id=None):
     except Exception as e:
         print("MongoDB Error: ", "fetch_open_studies")
         logging.error(e)
+
+def fetch_updates(db, study_id=None):
+    try:
+        open_studies = []
+        open_studies_cursor = db["updates"].find(
+            {
+                "study_id": study_id,
+            },
+            limit=100
+        )
+        
+        for open_study in open_studies_cursor:
+                open_studies.append(open_study)
+
+        return open_studies
+    except Exception as e:
+        print("MongoDB Error: ", "fetch_updates")
+        logging.error(e)

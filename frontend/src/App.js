@@ -15,6 +15,7 @@ import Study from './screens/Study';
 import Profile from './screens/Profile';
 import PostStudyResults from './screens/PostStudyResults';
 import ReportUpdate from "./screens/ReportUpdate";
+import Monitor from "./screens/Monitor";
 
 
 
@@ -59,6 +60,7 @@ function App () {
           <Route exact path="/postResults/:studyID" element={<PostStudyResults/>} />
           <Route exact path="/postUpdate/:studyID" element={<ReportUpdate/>} />
           <Route exact path="/ChoiceOnboard" element={<ChoiceOnboard/>} />
+          <Route exact path="/monitor/:studyID" element={<Monitor/>} />
         </Routes>) : (
         <Routes>
           <Route exact path="/" element={<LandingPage/>} />
