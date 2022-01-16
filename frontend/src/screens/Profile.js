@@ -11,8 +11,6 @@ import { getStorage, ref, list, getDownloadURL } from "firebase/storage";
 
 
 function Profile() {
-
-    const { Title, Paragraph, Text, Link } = Typography;
     const { Content } = Layout;
 
     const auth = getAuth();

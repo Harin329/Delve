@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import { Layout, Input, List, Card, Row, Divider, Anchor, Col } from 'antd';
+import { Layout, Input, List, Card, Row, Typography, Anchor, Col } from 'antd';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Logo from '../assets/logo.png'
 import SearchImg from '../assets/search.png'
@@ -34,7 +34,7 @@ function Home() {
     const storage = getStorage(app);
     const auth = getAuth();
     const storageRef = ref(storage, `User/${auth.currentUser.uid}.png`);
-    
+
 
     const onSearch = value => console.log(value);
 
@@ -46,6 +46,7 @@ function Home() {
         getStudyImages();
 
         getDownloadURL(storageRef).then((url) => {
+            console.log(url);
             setUserImage(url);
         })
     }, [data]);
@@ -69,7 +70,7 @@ function Home() {
     }
 
     const getStudyImages = () => {
-        data.forEach((item) =>  {
+        data.forEach((item) => {
             const listRef = ref(storage, `Study/${item.study_id}`);
             list(listRef, { maxResults: 1 }).then((res) => {
                 if (res.items.length > 0) {
@@ -221,7 +222,7 @@ function Home() {
                                 objectFit: 'contain',
                             }} />
                     </Row>
-                    <Row style={{ maxHeight: '85vh', overflow: 'auto', paddingTop: '1%', marginTop: 20 }} className='noScroll'>
+                    <Row style={{ maxHeight: '84vh', overflow: 'auto', paddingTop: '1%', marginTop: 20 }} className='noScroll'>
                         <InfiniteScroll
                             dataLength={data.length}
                         >
@@ -229,9 +230,30 @@ function Home() {
                                 grid={{ column: 3 }}
                                 dataSource={[...data]}
                                 renderItem={(item, index) => (
-                                    <div style={{ padding: 5, height: heightCalc(index), marginTop: topCalc(index), borderRadius: '20px', position: 'relative' }}>
-                                        <img src={studyImages[index]} onError={imgErrorDash} style={{backgroundColor: 'green', width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px'}}></img>
-                                        <h1 style={{position: 'absolute', zIndex: 5, bottom: 10, left: 20}}>{item.title}</h1>
+                                    <div style={{ height: heightCalc(index), marginTop: topCalc(index), borderRadius: '20px', position: 'relative' }} onClick={() => {
+                                        window.location.href = '/study/' + item.study_id
+                                    }}>
+                                        <div style={{
+                                            width: '99%',
+                                            height: '99%',
+                                            top: 0,
+                                            left: 0,
+                                            borderRadius: '20px',
+                                            backgroundColor: 'black',
+                                            position: 'absolute',
+                                            opacity: 0.6
+                                        }}></div>
+                                        <img src={studyImages[index]} onError={imgErrorDash} style={{ padding: 5, width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px' }}></img>
+                                        <Typography style={{
+                                            position: 'absolute',
+                                            bottom: 20,
+                                            left: 20,
+                                            color: 'white',
+                                            fontWeight: 'bold',
+                                            textAlign: 'left',
+                                            fontSize: '22px'
+                                        }}>
+                                            {item.title}</Typography>
                                     </div>
                                 )}
                             />
