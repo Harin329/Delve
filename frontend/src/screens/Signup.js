@@ -7,6 +7,8 @@ import {
   Typography
 } from 'antd';
 
+import { useNavigate } from 'react-router-dom';
+
 import axios from 'axios';
 import '../App.css';
 import back from '../assets/backwhite.png'
@@ -49,13 +51,24 @@ const tailFormItemLayout = {
 };
 
 
+
 function Signup() {
+
+  const navigate = useNavigate();
+  const backnav = () => {
+    navigate(-1)
+  }
+  const loginnav= () => {
+    console.log("success");
+    navigate('/login');
+}
 
   const auth = getAuth();
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
+    //navigate('/ChoiceOnboard');
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((user) => {
         console.log(user.user.uid);
@@ -85,7 +98,8 @@ function Signup() {
                     position: 'absolute',
                     backgroundColor: "#528B6E",
                     borderColor: "#528B6E",
-                    }}> 
+                    }}
+                onClick={backnav}> 
             <img src={back} style={{
                     position: 'absolute',
                     left: 50,
@@ -121,7 +135,8 @@ function Signup() {
               color: '#528B6E',
               border: 0,
               fontWeight: 700,
-            }}>
+            }}
+            onClick={loginnav}>
             Log In
           </Button>
         </div>
@@ -159,6 +174,7 @@ function Signup() {
                 borderRadius: 50,
                 paddingBottom: 10,
                 paddingTop: 10,
+                paddingLeft: 20,
                 backgroundColor: 'rgba(82, 139, 110, 0.32)',
               }} />
             </Form.Item>
@@ -180,6 +196,7 @@ function Signup() {
                 borderRadius: 50,
                 paddingBottom: 10,
                 paddingTop: 10,
+                paddingLeft: 20,
                 backgroundColor: 'rgba(82, 139, 110, 0.32)',
               }} />
             </Form.Item>
@@ -201,6 +218,7 @@ function Signup() {
                 borderRadius: 50,
                 paddingBottom: 10,
                 paddingTop: 10,
+                paddingLeft: 20,
                 backgroundColor: 'rgba(82, 139, 110, 0.32)',
 
               }} />
@@ -230,6 +248,7 @@ function Signup() {
                 borderRadius: 50,
                 paddingBottom: 10,
                 paddingTop: 10,
+                paddingLeft: 20,
                 backgroundColor: 'rgba(82, 139, 110, 0.32)',
               }} />
             </Form.Item>

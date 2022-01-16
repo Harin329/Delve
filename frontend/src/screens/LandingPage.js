@@ -1,6 +1,7 @@
 import React from 'react';
 import { Typography, Form, Input, Button, Checkbox, Row, Col } from 'antd';
 import Column from 'antd/lib/table/Column';
+import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 import logo from '../assets/logocolor.png'
@@ -9,6 +10,18 @@ import logo from '../assets/logocolor.png'
 const { Title, Paragraph, Text, Link } = Typography;
 
 function LandingPage() {
+    let navigate = useNavigate();
+
+    const loginnav= () => {
+        console.log("success");
+        navigate('/login');
+    }
+
+    const signupnav = () => {
+        console.log("success");
+        navigate('/signup');
+    }
+
     return (
     <div class="diagonalcontainer">
         <div style={{
@@ -35,6 +48,7 @@ function LandingPage() {
                 }}>Jump into, participate, and explore the world of information.</Title>
             <div></div>
             <button type="primary" htmlType="submit" shape="round" size={'small'}
+                onClick={signupnav}
                 style={{
                     
                     alignSelf: 'center',
@@ -53,7 +67,7 @@ function LandingPage() {
                 Join In
             </button>
             <text
-                onClick={() => {console.log('success')}}
+                onClick={loginnav}
                 style={{
                 marginTop: 40,
                 fontSize: 20,

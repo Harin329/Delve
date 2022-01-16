@@ -5,6 +5,7 @@ import Column from 'antd/lib/table/Column';
 import '../App.css';
 import back from '../assets/back.png'
 
+import { useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const { Title, Paragraph, Text, Link } = Typography;
@@ -12,7 +13,12 @@ const { Title, Paragraph, Text, Link } = Typography;
 
 
 function Login() {
-  
+
+      const navigate = useNavigate();
+      const backnav = () => {
+        navigate(-1)
+      }
+
     const auth = getAuth();
 
     const onFinish = (values) => {
@@ -35,7 +41,8 @@ function Login() {
                     position: 'absolute',
                     backgroundColor: "#FFFFFF",
                     borderColor: "#FFFFFF",
-                    }}> 
+                    }}
+                    onClick={backnav}> 
             <img src={back} style={{
                     position: 'absolute',
                     left: 50,
@@ -83,6 +90,7 @@ function Login() {
                   paddingRight: 300,
                   borderRadius: 50,
                   paddingBottom: 10,
+                  paddingLeft: 20,
                   paddingTop: 10,
                   backgroundColor: 'rgba(82, 139, 110, 0.32)',
                 }}/>
@@ -96,6 +104,7 @@ function Login() {
                   borderRadius: 50,
                   paddingBottom: 10,
                   paddingTop: 10,
+                  paddingLeft: 20,
                   backgroundColor: 'rgba(82, 139, 110, 0.32)',
                 }}/>
               </Form.Item>

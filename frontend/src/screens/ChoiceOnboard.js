@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Typography, Form, Input, Button, Checkbox, Row, Col } from 'antd';
+
 import Column from 'antd/lib/table/Column';
 import '../App.css';
+import { useNavigate } from 'react-router-dom'; 
 
 import researcher from '../assets/researcher.png'
 import participant from '../assets/participant.png'
@@ -10,13 +12,28 @@ import back from '../assets/backwhite.png'
 const { Title, Paragraph, Text, Link } = Typography;
 
 function ChoiceOnboard() {
+
+    const navigate = useNavigate();
+    const backnav = () => {
+      navigate(-1)
+    }
+
+    const researcherhandle = () => {
+        SetUserResearcher(true)
+        navigate("/")
+    }
+    
+
+    const[UserResearcher, SetUserResearcher] = useState(false)
+
     return(
         <div>
             <Button style={{
                         position: 'absolute',
                         backgroundColor: "#528B6E",
                         borderColor: "#528B6E",
-                        }}> 
+                        }}
+                    onClick={backnav}> 
                 <img src={back} style={{
                         position: 'absolute',
                         left: 50,
@@ -73,7 +90,8 @@ function ChoiceOnboard() {
                                 fontWeight: 400,
                                 fontSize: 22,
                                 backgroundColor: "#528B6E",
-                            }}>
+                            }}
+                            onClick={researcherhandle}>
                             Select
                         </Button>
                 </div>
@@ -117,7 +135,8 @@ function ChoiceOnboard() {
                                 fontWeight: 400,
                                 fontSize: 22,
                                 backgroundColor: "#528B6E",
-                            }}>
+                            }}
+                            onClick={() => {navigate("/")}}>
                             Select
                         </Button>
                 </div>
