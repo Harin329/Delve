@@ -41,6 +41,15 @@
   }
 }
 
-.Sider {
-  background-color: 'white';
+.noScroll::-webkit-scrollbar {
+  display: none;
+}
+
+.sideButtons {
+  background-color: white;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
 }
