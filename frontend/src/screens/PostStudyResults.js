@@ -83,8 +83,6 @@ function PostStudyResults() {
         } catch (e) {
             console.log(e);
         }
-
-
     }
 
     return (
