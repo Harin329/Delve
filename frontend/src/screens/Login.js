@@ -2,44 +2,50 @@ import React from 'react';
 import { Typography, Form, Input, Button, Checkbox } from 'antd';
 import Column from 'antd/lib/table/Column';
 
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 const { Title, Paragraph, Text, Link } = Typography;
 
-function Login() {
 
-    const onFinish = (values: any) => {
-      console.log('Success:', values);
+
+function Login() {
+  
+    const auth = getAuth();
+
+    const onFinish = (values) => {
+      signInWithEmailAndPassword(auth, values.Email, values.Password)
+      .then((userCredential) => {
+        console.log(userCredential.user.uid);
+      })
+      .catch((error) => {
+        console.log('fail')
+      })
     };
 
-    const onFinishFailed = (errorInfo: any) => {
+    const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo);
     };
 
     return (
-      <div
-        style= {{
-          float: 'right',
-          width: "95%",
-          height: "100%",
-          backgroundColor: 'beige',
-          display: "flex",
+      <div style={{
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100vw',
+        height: '100vh',
+      }}>
+        <div style={{
+          display: 'flex',
           flexDirection: 'column',
-          paddingTop: "10%",
-        }}
-
-      > 
-         <Typography>
-                <Title>Log In</Title>
-          </Typography> 
-
-          <div style={{
-            float: 'left',
-            justifyContent: 'center',
-            paddingTop: '5%',
-          }}>
-            <Form
+          backgroundColor: 'beige',
+          width: "55%",
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+          <Title style ={{
+            marginBottom: "8%",
+          }}> Log In </Title>
+          <Form
               name="basic"
-              labelCol={{ span: 8 }}
-              wrapperCol={{ span: 8 }}
               initialValues={{ remember: true }}
               onFinish={onFinish}
               onFinishFailed={onFinishFailed}
@@ -57,33 +63,52 @@ function Login() {
                     message: 'Please input your E-mail!',
                   },]}
               >
-                <Input placeholder="Email"/>
+                <Input placeholder="Email" style={{
+                  paddingRight: 300,
+                  borderRadius: 50,
+                  paddingBottom: 10,
+                  paddingTop: 10,
+                }}/>
               </Form.Item>
 
               <Form.Item
                 name="Password"
                 rules={[{ required: true, message: 'Please input your Password!' }]}
               >
-                <Input placeholder="Password"/>
+                <Input.Password placeholder="Password" style={{
+                  borderRadius: 50,
+                  paddingBottom: 10,
+                  paddingTop: 10,
+                }}/>
               </Form.Item>
 
-              <Form.Item wrapperCol={{ offset: 18, span: 8}}>
+              <Form.Item wrapperCol={{ offset: 7, span: 8}}>
                 <Button type="primary" 
                         htmlType="submit"
+                        shape="round"
                         style={{
+                            marginTop: 30,
                             paddingRight: 80,
                             paddingLeft: 80,
+                            paddingTop: 15,
+                            paddingBottom: 35,
                         }}
                 >
-                  Submit
+                  Log In
                 </Button>
               </Form.Item>
             </Form>
-          </div>
-          
-
-      </div> 
-    
+        </div>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: '#528C6F',
+          width: "45%",
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>        
+        </div>
+      </div>
 
     );
   }

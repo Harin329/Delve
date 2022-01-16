@@ -8,8 +8,7 @@ import Filter from '../assets/filter.png'
 import { Link } from 'react-router-dom';
 
 function Home() {
-    const { Header, Sider, Content } = Layout;
-    const { Search } = Input;
+    const { Content } = Layout;
 
     const [userResearcher, setUserResearcher] = useState(true);
     const [currentSection, setCurrentSection] = useState('All');
@@ -109,9 +108,53 @@ function Home() {
         }
     ];
 
+    function heightCalc(index) {
+        if (index % 9 == 0) {
+            return '400px';
+        } else if (index % 9 == 1) {
+            return '250px';
+        } else if (index % 9 == 2) {
+            return '200px'
+        } else if (index % 9 == 3) {
+            return '200px'
+        } else if (index % 9 == 4) {
+            return '300px'
+        } else if (index % 9 == 5) {
+            return '250px'
+        } else if (index % 9 == 6) {
+            return '250px'
+        } else if (index % 9 == 7) {
+            return '300px'
+        } else if (index % 9 == 8) {
+            return '400px'
+        }
+    }
+
+    function topCalc(index) {
+        if (index % 9 == 0) {
+            return 0;
+        } else if (index % 9 == 1) {
+            return 0;
+        } else if (index % 9 == 2) {
+            return 0
+        } else if (index % 9 == 3) {
+            return 0;
+        } else if (index % 9 == 4) {
+            return '-150px'
+        } else if (index % 9 == 5) {
+            return '-200px'
+        } else if (index % 9 == 6) {
+            return 0;
+        } else if (index % 9 == 7) {
+            return '-50px'
+        } else if (index % 9 == 8) {
+            return '-150px'
+        }
+    }
+
     return (
-        <Row align='middle' className='App' style={{ backgroundColor: '#438151', height: '100vh', paddingLeft: 10, paddingRight: 10 }}>
-            <Col span={2} style={{ backgroundColor: '#438151', marginBottom: '21%' }}>
+        <Row align='middle' className='App' style={{ backgroundColor: '#528C6F', height: '100vh', paddingLeft: 10, paddingRight: 10 }}>
+            <Col span={2} style={{ backgroundColor: '#528C6F', marginBottom: '21%' }}>
                 <Row align='middle' style={{ marginBottom: 29 }} className='sideButtonsNormal'>
                     <img
                         src={Logo}
@@ -173,7 +216,7 @@ function Home() {
                             alt="Search"
                             style={{
                                 width: '50px',
-                                backgroundColor: '#438151',
+                                backgroundColor: '#528C6F',
                                 objectFit: 'cover',
                                 borderRadius: 50
                             }} />
@@ -187,17 +230,18 @@ function Home() {
                                 objectFit: 'contain',
                             }} />
                     </Row>
-                    <Row style={{ maxHeight: '85vh', overflow: 'auto', paddingTop: '2%', marginTop: 10 }} className='noScroll'>
+                    <Row style={{ maxHeight: '85vh', overflow: 'auto', paddingTop: '1%', marginTop: 20 }} className='noScroll'>
                         <InfiniteScroll
                             dataLength={data.length}
                         >
                             <List
-                                grid={{ column: 4 }}
+                                grid={{ column: 3 }}
                                 dataSource={data}
-                                renderItem={item => (
-                                    <List.Item style={{ padding: 5 }}>
-                                        <Card title={item.title}>Card content</Card>
-                                    </List.Item>
+                                renderItem={(item, index) => (
+                                    <div style={{ padding: 5, height: heightCalc(index), marginTop: topCalc(index), borderRadius: '20px', position: 'relative' }}>
+                                        <img src={Filter} style={{backgroundColor: 'green', width: '100%', height: '100%', borderRadius: '20px'}}></img>
+                                        <h1 style={{position: 'absolute', zIndex: 5, bottom: 10, left: 20}}>{item.title}</h1>
+                                    </div>
                                 )}
                             />
                         </InfiniteScroll>
