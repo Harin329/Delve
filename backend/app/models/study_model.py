@@ -24,7 +24,7 @@ class StudyModel(BaseModel):
                 "contact": "researcher@test.com",
                 "description": "We are seeking X participants for a trial of Y to determine its effects on Z",
                 "requirements": "Must be between 18-55 years old",
-                "categories": ["medicine"],
+                "categories": ["clinical"],
                 "status": "open",
             }
         }
