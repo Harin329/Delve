@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Typography, Form, Input, Button, Checkbox, Row, Col } from 'antd';
-
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Column from 'antd/lib/table/Column';
 import '../App.css';
 import { useNavigate } from 'react-router-dom'; 
@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import researcher from '../assets/researcher.png'
 import participant from '../assets/participant.png'
 import back from '../assets/backwhite.png'
+
+import axios from 'axios';
 
 const { Title, Paragraph, Text, Link } = Typography;
 
@@ -19,13 +21,25 @@ function ChoiceOnboard() {
     }
 
     const researcherhandle = () => {
-        SetUserResearcher(true)
+        const auth = getAuth();
+
+        try {
+            var config = {
+                method: 'put',
+                url: `http://127.0.0.1:8000/user/?user_id=${auth.currentUser.uid}`,
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+              };
+              axios(config).then((res) => {
+                console.log(res.data);
+              })
+        } catch (e) {
+            console.log(e);
+        }
         navigate("/")
     }
     
-
-    const[UserResearcher, SetUserResearcher] = useState(false)
-
     return(
         <div>
             <Button style={{
