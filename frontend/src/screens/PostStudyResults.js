@@ -47,7 +47,7 @@ function PostStudyResults() {
         try {
             var config = {
                 method: 'post',
-                url: 'http://localhost:8000/results',
+                url: 'http://delve.harinwu.com:8000/results',
                 headers: {
                     'Content-Type': 'application/json'
                 },

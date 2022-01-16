@@ -29,7 +29,7 @@ function ReportUpdate() {
         try {
             var config = {
                 method: 'post',
-                url: 'http://localhost:8000/study/' + studyID + '/update',
+                url: 'http://delve.harinwu.com:8000/study/' + studyID + '/update',
                 headers: {
                     'Content-Type': 'application/json'
                 },

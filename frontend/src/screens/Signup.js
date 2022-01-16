@@ -75,7 +75,7 @@ function Signup() {
         console.log(getAuth().currentUser);
         var config = {
           method: 'post',
-          url: 'http://localhost:8000/user',
+          url: 'http://delve.harinwu.com:8000/user',
           headers: {
             'Content-Type': 'application/json'
           },

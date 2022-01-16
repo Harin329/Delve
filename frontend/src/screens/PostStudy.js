@@ -52,7 +52,7 @@ function PostStudy() {
         try {
             var config = {
                 method: 'post',
-                url: 'http://localhost:8000/study',
+                url: 'http://delve.harinwu.com:8000/study',
                 headers: {
                     'Content-Type': 'application/json'
                 },

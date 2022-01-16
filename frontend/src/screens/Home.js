@@ -55,7 +55,7 @@ function Home() {
         try {
             const config = {
                 method: 'get',
-                url: 'http://localhost:8000/study/open/' + currentSection.toLowerCase(),
+                url: 'http://delve.harinwu.com:8000/study/open/' + currentSection.toLowerCase(),
                 headers: {
                     'Content-Type': 'application/json'
                 },
