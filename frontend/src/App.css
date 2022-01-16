@@ -86,3 +86,29 @@
   font-size: 18px;
   font-weight: bold;
 }
+
+.ant-input:placeholder-shown, .ant-input-lg, .ant-input:focus, .ant-input:hover{
+  background-color: 'rgba(82, 139, 110, 0.32)' !important;
+  color: 'rgba(82, 139, 110, 0.32)';
+}
+
+.input.ant-input {
+  background-color: 'rgba(82, 139, 110, 0.32)' !important;
+}
+
+.ant-input-selection-placeholder {
+  color: #f0f0f0;
+}
+.ant-form-item {
+  background-color: 'rgba(82, 139, 110, 0.32)' !important;
+}
+
+input[type='text'], input[type='password'], input[type='number'], textarea {
+  -webkit-appearance: red;
+}
+
+#inputID::placeholder {
+  color: white;
+  padding-left: 12px;
+  opacity: 1;
+}

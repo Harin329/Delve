@@ -5,7 +5,7 @@ import '../App.css';
 
 import researcher from '../assets/researcher.png'
 import participant from '../assets/participant.png'
-import back from '../assets/back.png'
+import back from '../assets/backwhite.png'
 
 const { Title, Paragraph, Text, Link } = Typography;
 
@@ -15,7 +15,7 @@ function ChoiceOnboard() {
             <Button style={{
                         position: 'absolute',
                         backgroundColor: "#528B6E",
-                        outline: 'none',
+                        borderColor: "#528B6E",
                         }}> 
                 <img src={back} style={{
                         position: 'absolute',

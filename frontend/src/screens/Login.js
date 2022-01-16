@@ -2,6 +2,9 @@ import React from 'react';
 import { Typography, Form, Input, Button, Checkbox } from 'antd';
 import Column from 'antd/lib/table/Column';
 
+import '../App.css';
+import back from '../assets/back.png'
+
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const { Title, Paragraph, Text, Link } = Typography;
@@ -27,6 +30,20 @@ function Login() {
     };
 
     return (
+      <div>
+          <Button style={{
+                    position: 'absolute',
+                    backgroundColor: "#FFFFFF",
+                    borderColor: "#FFFFFF",
+                    }}> 
+            <img src={back} style={{
+                    position: 'absolute',
+                    left: 50,
+                    top: 50,
+                    height: 40,
+                    width: 40,
+                }}/> 
+          </Button>  
       <div style={{
         display: 'flex',
         flexDirection: 'row',
@@ -62,7 +79,7 @@ function Login() {
                     message: 'Please input your E-mail!',
                   },]}
               >
-                <Input placeholder="Email" style={{
+                <Input placeholder="Email" id="inputID" style={{
                   paddingRight: 300,
                   borderRadius: 50,
                   paddingBottom: 10,
@@ -75,7 +92,7 @@ function Login() {
                 name="Password"
                 rules={[{ required: true, message: 'Please input your Password!' }]}
               >
-                <Input.Password placeholder="Password" style={{
+                <Input.Password id="inputID" placeholder="Password" bordered={false} style={{
                   borderRadius: 50,
                   paddingBottom: 10,
                   paddingTop: 10,
@@ -113,7 +130,7 @@ function Login() {
         }}>        
         </div>
       </div>
-
+      </div>
     );
   }
 
