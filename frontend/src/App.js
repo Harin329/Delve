@@ -48,7 +48,7 @@ function App () {
 
   return (
     <Router >
-      {user ? (
+      {true ? (
         <Routes>
           <Route exact path="/" element={<Home/>} />
           <Route exact path="/postStudy" element={<PostStudy/>} />

@@ -160,7 +160,7 @@ function Home() {
                         src={Logo}
                         alt="Delve Logo"
                         style={{
-                            width: '50%',
+                            width: '70%',
                             objectFit: 'contain',
                         }} />
                 </Row>
@@ -204,7 +204,7 @@ function Home() {
             <Col span={22} style={{ borderRadius: '20px', backgroundColor: "white", height: '98vh' }}>
                 <Content style={{ padding: '2%', paddingBottom: 0, borderRadius: '20px' }}>
                     <Row align='middle' justify='space-between'>
-                        <Input bordered={false} size="large" prefix={<img
+                        <Input bordered={false} size="large" placeholder='Search...' prefix={<img
                             src={SearchImg}
                             alt="Search"
                             style={{
