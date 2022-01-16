@@ -58,6 +58,7 @@ function App () {
           <Route exact path="/profile/:userID" element={<Profile/>} />
           <Route exact path="/postResults/:studyID" element={<PostStudyResults/>} />
           <Route exact path="/postUpdate/:studyID" element={<ReportUpdate/>} />
+          <Route exact path="/ChoiceOnboard" element={<ChoiceOnboard/>} />
         </Routes>) : (
         <Routes>
           <Route exact path="/" element={<LandingPage/>} />

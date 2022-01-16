@@ -68,7 +68,7 @@ function Signup() {
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    navigate('/');
+    navigate('/ChoiceOnboard');
     createUserWithEmailAndPassword(auth, values.email, values.password)
       .then((user) => {
         console.log(user.user.uid);
