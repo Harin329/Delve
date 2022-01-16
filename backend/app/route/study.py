@@ -4,7 +4,7 @@ import logging
 from datetime import datetime
 from typing import List, Optional
 from app.indexer.tools import connect_mongo_db
-from app.indexer.study import insert_study, insert_update, add_user_to_study, fetch_studies_for_user, fetch_open_studies
+from app.indexer.study import insert_study, insert_update, add_user_to_study, fetch_studies_for_user, fetch_open_studies, fetch_study_by_id
 from app.models.study_model import StudyModel
 from app.models.update_model import UpdateModel
 
@@ -63,6 +63,16 @@ async def get_open_studies_by_category_id(category_ids: Optional[List[str]] = Qu
         else:
             res = fetch_open_studies(db)
             return res
+    except Exception as e:
+        logging.error(e)
+        return "Error with {}".format(e), 400
+
+@router.get("/{study_id}", response_model=StudyModel)
+async def get_study_by_id(study_id: str):
+    try:
+        db = connect_mongo_db()
+        res = fetch_study_by_id(db, study_id)
+        return res
     except Exception as e:
         logging.error(e)
         return "Error with {}".format(e), 400

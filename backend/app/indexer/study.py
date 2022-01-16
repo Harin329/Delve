@@ -25,6 +25,14 @@ def fetch_studies_for_user(db, user_id, is_researcher):
         print("MongoDB Error: ", "fetch_studies_for_user")
         logging.error(e)
 
+def fetch_study_by_id(db, study_id):
+    try:
+        study = db["studies"].find_one({"study_id": study_id})
+        return study
+    except Exception as e:
+        print("MongoDB Error: ", "insert_study")
+        logging.error(e)
+
 def add_user_to_study(db, study_id, participant_id):
     try:
         study = db["studies"].find_one({"study_id": study_id})
