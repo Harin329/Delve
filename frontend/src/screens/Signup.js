@@ -51,7 +51,11 @@ function Signup () {
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
-    createUserWithEmailAndPassword(auth, values.email, values.password).then((user) => {console.log(user.user.uid)})
+    createUserWithEmailAndPassword(auth, values.email, values.password)
+    .then((user) => {
+      console.log(user.user.uid);
+      console.log(getAuth().currentUser)
+      })
   };
 
   return (
