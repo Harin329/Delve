@@ -118,6 +118,7 @@ function ChoiceOnboard() {
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        objectFit: 'contain',
                         borderRadius: "10%",
                     }}
                 >
@@ -127,9 +128,9 @@ function ChoiceOnboard() {
                         style={{
                             height: 280,
                             width: 280,
-                            borderRadius: "50%",
                             marginBottom: 30,
                             marginTop: "15%",
+                            objectFit: 'contain',
                         }}/>
                     <Title style={{fontSize: 50, }}> Participant </Title>
                     <h2 style={{

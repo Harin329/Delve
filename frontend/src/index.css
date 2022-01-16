@@ -11,3 +11,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+html * {
+  font-family: 'Roboto-Regular';
+}
+
+@font-face {
+  font-family: 'Roboto-Light';
+  src: local('Roboto'), url(./fonts/Roboto-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: local('Roboto'), url(./fonts/Roboto-Regular.ttf) format('truetype');
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    font-weight: 900;
+    src: local('Roboto'), url(./fonts/Roboto-Medium.ttf) format('truetype');
+}

@@ -25,10 +25,18 @@ function LandingPage() {
 
     return (
     <div style={{
-        background: `url("${background}")`,
         width: '100vw',
         height: '100vh',
     }}>
+        <img 
+            src={background} 
+            alt="my image"
+            style={{
+                height: '100vh',
+                right: 0,
+                objectFit: 'contain',
+                position: 'absolute',
+            }}/>
         <div style={{
             position: 'absolute',
             left: 200,
@@ -47,7 +55,8 @@ function LandingPage() {
             <Title style={{
                     marginTop: "-8%",
                     fontSize: 40,
-                    width: "55%" 
+                    width: "55%",
+                    fontFamily: "Roboto-Light",
                 }}>Jump into, participate, and explore the world of information.</Title>
             <div>
             <Button shape="round" size={'small'}
@@ -71,10 +80,12 @@ function LandingPage() {
                 onClick={loginnav}
                 style={{
                 marginTop: 40,
-                fontSize: 22,
+                fontSize: 18,
                 color: 'black',
                 fontWeight: 600,
-            }}> Already have an account? Log in</text>
+            }}> <text style={{
+                fontWeight: 200,
+            }}>Already have an account?</text> Log in</text>
         </div>
        
     </div>

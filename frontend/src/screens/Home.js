@@ -18,6 +18,7 @@ function Home() {
     const [currentSection, setCurrentSection] = useState('All');
     const [data, setData] = useState([]);
     const [studyImages, setStudyImages] = useState([]);
+    const [profileImageURL, setUserImage] = useState('');
 
     const firebaseConfig = {
         apiKey: "AIzaSyCfzhkWjKe73Eb8Ojovc75dghbsDy-DU-E",
@@ -33,7 +34,7 @@ function Home() {
     const storage = getStorage(app);
     const auth = getAuth();
     const storageRef = ref(storage, `User/${auth.currentUser.uid}.png`);
-    const profileImageURL = getDownloadURL(storageRef);
+    
 
     const onSearch = value => console.log(value);
 
@@ -43,6 +44,10 @@ function Home() {
 
     useEffect(() => {
         getStudyImages();
+
+        getDownloadURL(storageRef).then((url) => {
+            setUserImage(url);
+        })
     }, [data]);
 
     const getOpenStudies = (currentSection) => {
@@ -195,6 +200,7 @@ function Home() {
                             onError={imgError}
                             style={{
                                 width: '50px',
+                                height: '50px',
                                 backgroundColor: '#528C6F',
                                 objectFit: 'cover',
                                 borderRadius: 50
