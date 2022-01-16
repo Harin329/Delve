@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import '../App.css';
 import { Button, Typography, Layout, Input, List, Card, Row } from 'antd';
 
+import { useNavigate } from 'react-router-dom';
 import back from "../assets/back.png"
 import participant from "../assets/researcher.png"
 
@@ -42,6 +43,11 @@ function Profile() {
             console.log(e);
         }
     }, [userID])
+
+    const navigate = useNavigate();
+    const backnav = () => {
+        navigate(-1)
+    }
 
     const getAllStudies = (UserResearcher, userID) => {
         try {

@@ -29,6 +29,7 @@ function Login() {
       .catch((error) => {
         console.log('fail')
       })
+      navigate("/")
     };
 
     const onFinishFailed = (errorInfo) => {

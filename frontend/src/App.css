@@ -113,6 +113,7 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
   opacity: 1;
 }
 
+/*
 .diagonalcontainer {
   width: 100vw;
   height: 100vh;
@@ -132,3 +133,4 @@ input[type='text'], input[type='password'], input[type='number'], textarea {
   -webkit-clip-path: polygon(43% 0, 100% 0%, 100% 100%, 70% 100%);
   clip-path: polygon(43% 0, 100% 0%, 100% 100%, 70% 100%);
 }
+*/
