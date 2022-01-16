@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import '../App.css';
 import { Button, Typography, Layout, Input, List, Card, Row } from 'antd';
 
@@ -17,22 +17,40 @@ function Profile() {
     const auth = getAuth();
     const user = auth.currentUser;
 
-    const [userID,SetUserID] = useState(user.uid);
+    const [userID,setUserID] = useState(user.uid);
     const [data, setData] = useState([]);
-    const [UserResearcher, setUserResearcher] = useState(false);
+    const [userResearcher, setUserResearcher] = useState(false);
+    const [userName, setUserName] = useState('');
+
+    useEffect(() => {
+        try {
+            var configUser = {
+                method: 'get',
+                url: 'http://localhost:8000/user/?user_id=' + userID,
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {}
+            };
+            axios(configUser).then((userRes) => {
+                console.log(userRes.data);
+                setUserResearcher(userRes.data.is_researcher);
+                setUserName(userRes.data.username);
+                getAllStudies(userRes.data.is_researcher, userID)
+            })
+        } catch (e) {
+            console.log(e);
+        }
+    }, [userID])
 
     const getAllStudies = (UserResearcher, userID) => {
         try {
             const config = {
                 method: 'get',
-                url: 'http://localhost:8000/study/open/',
+                url: 'http://localhost:8000/study/?user_id=' + userID + '&is_researcher=' + UserResearcher,
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                params: {
-                    user_id: userID, 
-                    is_researcher: UserResearcher,
-                }
             };
             axios(config).then((res) => {
                 console.log(res.data);
@@ -48,19 +66,15 @@ function Profile() {
             <Layout style={{
                 backgroundColor: "#FFFFFF",
             }}>
-                <Button style={{
-                            position: 'absolute',
-                            backgroundColor: "#FFFFFF",
-                            borderColor: "#FFFFFF",
-                            }}> 
-                    <img src={back} style={{
-                            position: 'absolute',
-                            left: 50,
-                            top: 50,
-                            height: 40,
-                            width: 40,
-                        }}/> 
-                </Button>  
+                <img src={back} onClick={() => {
+                window.location.href = '/'
+            }} style={{
+                position: 'absolute',
+                left: 50,
+                top: 50,
+                height: 30,
+                width: 30,
+            }} />
                 <Content style={{
                     width: '80%',
                     alignSelf: "center",
@@ -74,7 +88,7 @@ function Profile() {
                             fontSize: 60,
                             fontWeight: 600,
                         }}> 
-                            Hello Amy
+                            Hello {userName}
                         </Row>
                         <Row style={{
                             fontSize: 20,
@@ -85,15 +99,16 @@ function Profile() {
                     
                     <List
                         style={{ padding: '20px' }}
-                        grid={{ gutter: 16, column: 4 }}
+                        grid={{ gutter: 0, column: 6 }}
                         dataSource={data}
                         renderItem={item => (
-                            <List.Item style={{
-                                
+                            <List.Item onClick={() => {
+                                window.location.href = '/study/' + item.study_id
                             }}>
                                 <div style={{ 
                                     padding: 5, 
                                     height: 200,
+                                    width: 200,
                                     marginTop: 20, 
                                     borderRadius: '20px', 
                                     position: 'relative' }}>

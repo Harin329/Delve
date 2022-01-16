@@ -4,7 +4,7 @@ import { Layout, Input, Space, Row, Col, Button, Typography } from 'antd';
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, listAll, getDownloadURL } from "firebase/storage";
 import axios from 'axios';
-import Thanks from '../assets/thanks.png'
+
 import back from '../assets/back.png'
 import backWhite from '../assets/backwhite.png'
 
@@ -19,7 +19,6 @@ function Study() {
     const [studyDirection, setStudyDirection] = useState('');
     const [participated, setParticipated] = useState(false);
     const [requirements, setRequirements] = useState([]);
-    const [thankYou, setThankYou] = useState(false);
     const [images, setImages] = useState([]);
     const auth = getAuth();
     const storage = getStorage();
@@ -159,6 +158,7 @@ function Study() {
                 setStudyDirection(res.data.direction);
                 setRequirements(res.data.requirements.split(","));
                 setResearchers(res.data.researchers);
+                setParticipated(res.data.participants.includes(auth.currentUser.uid));
                 const userID = res.data.researchers[0];
                 try {
                     var configUser = {
@@ -186,66 +186,30 @@ function Study() {
     const randomColors = ['#528C6F', '#5088BA', '#C37277', '#EFB943', '#8580CD']
 
     const upload = () => {
-        try {
-            var config = {
-                method: 'post',
-                url: 'http://localhost:8000/study/' + studyID + '/join?participant_id=' + auth.currentUser.uid,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data:
-                {
-                    "participant_id": auth.currentUser.uid,
-                }
-            };
-            axios(config).then((res) => {
-                console.log(res)
-                setThankYou(true);
-                setParticipated(true);
-            })
-        } catch (e) {
-            console.log(e);
+        if (participated) {
+            window.location.href = '/postUpdate/' + studyID
+        } else {
+            try {
+                var config = {
+                    method: 'post',
+                    url: 'http://localhost:8000/study/' + studyID + '/join?participant_id=' + auth.currentUser.uid,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data:
+                    {
+                        "participant_id": auth.currentUser.uid,
+                    }
+                };
+                axios(config).then((res) => {
+                    console.log(res)
+                    setParticipated(true);
+                    window.location.href = '/postUpdate/' + studyID
+                })
+            } catch (e) {
+                console.log(e);
+            }
         }
-    }
-
-    if (thankYou) {
-        return (
-            <div>
-                <img src={back} onClick={() => {
-                    setThankYou(false);
-                }} style={{
-                    position: 'absolute',
-                    left: 50,
-                    top: 50,
-                    height: 30,
-                    width: 30,
-                }} />
-                <img src={Thanks} style={{ width: '100vw', height: '100vh', objectFit: 'cover' }}></img>
-                <div>
-                    <Col style={{
-                        position: 'absolute',
-                        left: '10%',
-                        top: '30%',
-                        width: '30%',
-                    }}>
-                        <Row justify='start'>
-                            <Title>Thank You!</Title>
-                        </Row>
-                        <Row justify='start'>
-                            <Title level={3}>Now wait to hear back from {studyResearcher}.</Title>
-                        </Row>
-                        <Row style={{ marginTop: 30 }}>
-                            <Col span={2}>
-                                <Button type="primary" style={{ backgroundColor: '#528C6F', width: 150, borderRadius: 20 }} onClick={() => {
-                                    setThankYou(false);
-                                }}>Okay!</Button>
-                            </Col>
-                        </Row>
-                    </Col>
-                </div>
-            </div>
-
-        )
     }
 
     if (complete) {
@@ -306,12 +270,12 @@ function Study() {
                     </Row>
                     <Row justify='center' align='top' style={{ marginBottom: 30 }}>
                         {images[1] ? (<Col span={24}>
-                            <img src={images[1]} style={{ width: '100%', height: 300, borderRadius: '20px', objectFit: 'cover'  }}></img>
+                            <img src={images[1]} style={{ width: '100%', height: 300, borderRadius: '20px', objectFit: 'cover' }}></img>
                         </Col>) : null}
                     </Row>
                     <Row justify='start' align='top' style={{ marginBottom: 30 }}>
                         {images[2] ? (<Col span={6}>
-                            <img src={images[2]} style={{ width: 300, height: 300, borderRadius: '20px', objectFit: 'cover'  }}></img>
+                            <img src={images[2]} style={{ width: 300, height: 300, borderRadius: '20px', objectFit: 'cover' }}></img>
                         </Col>) : null}
                         <Col span={18}>
                             <Row justify='start'>
@@ -324,7 +288,7 @@ function Study() {
                     </Row>
                     <Row justify='start' align='top' style={{ marginBottom: 30 }}>
                         {images[3] ? (<Col span={6}>
-                            <img src={images[3]} style={{ width: 300, height: 300, borderRadius: '20px', objectFit: 'cover'  }}></img>
+                            <img src={images[3]} style={{ width: 300, height: 300, borderRadius: '20px', objectFit: 'cover' }}></img>
                         </Col>) : null}
                         <Col span={18}>
                             <Row justify='start'>
@@ -337,7 +301,7 @@ function Study() {
                     </Row>
                     <Row justify='start' align='top' style={{ marginBottom: 30 }}>
                         {images[4] ? (<Col span={6}>
-                            <img src={images[4]} style={{ width: 300, height: 300, borderRadius: '20px', objectFit: 'cover'  }}></img>
+                            <img src={images[4]} style={{ width: 300, height: 300, borderRadius: '20px', objectFit: 'cover' }}></img>
                         </Col>) : null}
                         <Col span={18}>
                             <Row justify='start'>
@@ -443,7 +407,7 @@ function Study() {
                             }}>Post Results</Button>
                         </Col>) : null}
                     <Col span={2}>
-                        <Button type="primary" style={{ backgroundColor: '#528C6F', width: '100%', borderRadius: 20 }} disabled={participated} onClick={upload}>{participated ? "Joined" : "Participate"}</Button>
+                        <Button type="primary" style={{ backgroundColor: '#528C6F', width: '100%', borderRadius: 20 }} onClick={upload}>{participated ? "Log Update" : "Participate"}</Button>
                     </Col>
                 </Row>
             </Space>

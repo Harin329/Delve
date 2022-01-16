@@ -7,6 +7,7 @@ import SearchImg from '../assets/search.png'
 import Filter from '../assets/filter.png'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { getAuth } from "firebase/auth";
 
 function Home() {
     const { Content } = Layout;
@@ -16,6 +17,7 @@ function Home() {
     const [data, setData] = useState([]);
 
     const onSearch = value => console.log(value);
+    const auth = getAuth();
 
     useEffect(() => {
         getOpenStudies(currentSection);
@@ -96,7 +98,7 @@ function Home() {
                         }} />
                 </Row>
                 <Row>
-                    <Link to={"/profile/1"} className='sideButtonsNormal'> My Studies</Link>
+                    <Link to={`/profile/${auth.currentUser.uid}`} className='sideButtonsNormal'> My Studies</Link>
                 </Row>
                 {userResearcher ? (<Row>
                     <Link to={"/postStudy"} className='sideButtonsNormal'> Post a Study</Link>
