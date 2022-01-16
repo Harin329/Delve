@@ -86,6 +86,12 @@ function Home() {
         return true;
     }
 
+    function imgErrorDash(ev) {
+        ev.target.onerror = "";
+        ev.target.src = "https://via.placeholder.com/150"
+        return true;
+    }
+
     function heightCalc(index) {
         if (index % 9 == 0) {
             return '400px';
@@ -218,7 +224,7 @@ function Home() {
                                 dataSource={[...data]}
                                 renderItem={(item, index) => (
                                     <div style={{ padding: 5, height: heightCalc(index), marginTop: topCalc(index), borderRadius: '20px', position: 'relative' }}>
-                                        <img src={studyImages[index]} style={{backgroundColor: 'green', width: '100%', height: '100%', borderRadius: '20px'}}></img>
+                                        <img src={studyImages[index]} onError={imgErrorDash} style={{backgroundColor: 'green', width: '100%', height: '100%', objectFit: 'cover', borderRadius: '20px'}}></img>
                                         <h1 style={{position: 'absolute', zIndex: 5, bottom: 10, left: 20}}>{item.title}</h1>
                                     </div>
                                 )}
