@@ -6,6 +6,7 @@ import plus from '../assets/plus.png'
 import { initializeApp } from "firebase/app";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import uuid from 'react-uuid'
+import axios from 'axios';
 
 function PostStudy() {
     const { TextArea } = Input;
@@ -26,6 +27,7 @@ function PostStudy() {
 
     const [studyID, setStudyID] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
+    const [studyCategory, setStudyCategory] = useState('');
     const [studyDescription, setStudyDescription] = useState('');
     const [studyDirection, setStudyDirection] = useState('');
     const [isScientific, setIsScientific] = useState(false);
@@ -40,18 +42,49 @@ function PostStudy() {
         setStudyID(uuid());
     }, [])
 
-    
+
     const upload = () => {
-        image.forEach((im) => {
-            console.log(im);
-            if (im == null) {
-                return
-            }
-            const storageRef = ref(storage, `Study/${studyID}/` + im.name)
-            uploadBytes(storageRef, im).then((snapshot) => {
-                console.log(snapshot)
-            });
-        })
+        try {
+            var config = {
+                method: 'post',
+                url: 'http://localhost:8000/study',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: {
+                    "study_id": studyID,
+                    "title": studyTitle,
+                    "researchers": [
+                        "Harin",
+                    ],
+                    "participants": [],
+                    "max_participants": 1000,
+                    "contact": "researcher@test.com",
+                    "description": studyDescription,
+                    "requirements": requirements.join(','),
+                    "categories": [
+                        "clinical"
+                    ],
+                    "status": "open"
+                }
+            };
+            axios(config).then((res) => {
+                image.forEach((im) => {
+                    console.log(im);
+                    if (im == null) {
+                        return
+                    }
+                    const storageRef = ref(storage, `Study/${studyID}/` + im.name)
+                    uploadBytes(storageRef, im).then((snapshot) => {
+                        console.log(snapshot)
+                    });
+                })
+            })
+        } catch (e) {
+            console.log(e);
+        }
+
+
     }
 
     return (
@@ -76,6 +109,16 @@ function PostStudy() {
                     <Col span={24}>
                         <Input size="large" placeholder="Enter your title here..." value={studyTitle} onChange={(text) => {
                             setStudyTitle(text.target.value)
+                        }} bordered={false} style={{ marginLeft: -20, marginTop: -30, marginBottom: 30 }} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Title level={4}>Category</Title>
+                </Row>
+                <Row justify='start'>
+                    <Col span={24}>
+                        <Input size="large" placeholder="Enter a category..." value={studyCategory} onChange={(text) => {
+                            setStudyCategory(text.target.value)
                         }} bordered={false} style={{ marginLeft: -20, marginTop: -30, marginBottom: 30 }} />
                     </Col>
                 </Row>
