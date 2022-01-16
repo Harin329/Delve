@@ -16,6 +16,7 @@ default_study = {
     "max_participants": 50,
     "contact": "researcher@test.com",
     "description": "We are seeking X participants for a trial of Y to determine its effects on Z",
+    "direction": "To the moon!",
     "requirements": "Must be between 18-55 years old",
     "categories": ["clinical"],
     "status": "open",
@@ -53,15 +54,12 @@ async def get_all_studies_for_user(user_id: str, is_researcher: bool):
         logging.error(e)
         return "Error with {}".format(e), 400
 
-@router.get("/open", response_model=List[StudyModel])
-async def get_open_studies_by_category_id(category_ids: Optional[List[str]] = Query(None)):
+@router.get("/open/{category_id}", response_model=List[StudyModel])
+async def get_open_studies_by_category_id(category_id: str):
     try:
         db = connect_mongo_db()
-        if category_ids:
-            res = fetch_open_studies(db, category_ids)
-            return res
-        else:
-            res = fetch_open_studies(db)
+        if category_id:
+            res = fetch_open_studies(db, category_id)
             return res
     except Exception as e:
         logging.error(e)
