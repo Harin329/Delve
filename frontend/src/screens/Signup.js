@@ -2,31 +2,30 @@ import React, { useState } from 'react';
 import {
   Form,
   Input,
-  InputNumber,
-  Cascader,
-  Select,
   Row,
-  Col,
-  Checkbox,
   Button,
-  AutoComplete,
+  Typography
 } from 'antd';
+import '../styles/onboard.css';
+
+
+const { Title, Paragraph, Text, Link } = Typography;
 
 const formItemLayout = {
   labelCol: {
     xs: {
-      span: 24,
+      span: 40,
     },
     sm: {
-      span: 8,
+      span: 100,
     },
   },
   wrapperCol: {
     xs: {
-      span: 24,
+      span: 40,
     },
     sm: {
-      span: 16,
+      span: 40,
     },
   },
 };
@@ -43,7 +42,9 @@ const tailFormItemLayout = {
   },
 };
 
+
 function Signup () {
+
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -52,86 +53,136 @@ function Signup () {
 
 
   return (
-    <div>
-      <Form
-        {...formItemLayout}
-        form={form}
-        name="register"
-        onFinish={onFinish}
-        scrollToFirstError
-      >
-        <Form.Item
-          name="nickname"
-          tooltip="What do you want others to call you?"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your nickname!',
-              whitespace: true,
-            },
-          ]}
+    <div style={{
+      display: 'flex',
+      flexDirection: Row,
+      width: '100vw',
+      height: '100vh',
+    }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'pink',
+        width: "50%",
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <Title> Already have an account? </Title>
+        <Button type="primary" shape="round" size={'large'}
+              style={{
+                  marginTop: 20,
+                  paddingRight: 60,
+                  paddingLeft: 60,
+              }}>
+              Log In
+          </Button> 
+      </div>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        backgroundColor: 'beige',
+        width: "50%",
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+         <Title style={{
+           marginBottom: "8%",
+         }}> Create an Account </Title>
+        <Form
+          {...formItemLayout}
+          form={form}
+          name="register"
+          onFinish={onFinish}
+          size={'large'}
+          scrollToFirstError
         >
-          <Input placeholder="Full Name"/>
-        </Form.Item>
-
-        <Form.Item
-          name="email"
-          rules={[
-            {
-              type: 'email',
-              message: 'The input is not valid E-mail!',
-            },
-            {
-              required: true,
-              message: 'Please input your E-mail!',
-            },
-          ]}
-        >
-          <Input placeholder="Email"/>
-        </Form.Item>
-
-        <Form.Item
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-          hasFeedback
-        >
-          <Input.Password placeholder="Password"/>
-        </Form.Item>
-
-        <Form.Item
-          name="confirm"
-          dependencies={['password']}
-          hasFeedback
-          rules={[
-            {
-              required: true,
-              message: 'Please confirm your password!',
-            },
-            ({ getFieldValue }) => ({
-              validator(_, value) {
-                if (!value || getFieldValue('password') === value) {
-                  return Promise.resolve();
-                }
-
-                return Promise.reject(new Error('The two passwords that you entered do not match!'));
+          <Form.Item
+            name="nickname"
+            tooltip="What do you want others to call you?"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your nickname!',
+                whitespace: true,
               },
-            }),
-          ]}
-        >
-          <Input.Password placeholder="Confirm Password"/>
-        </Form.Item>
+            ]}
+          >
+            <Input placeholder="Full Name" style={{
+              paddingRight: 300,
+              borderRadius: 50,
+            }}/>
+          </Form.Item>
 
-        <Form.Item {...tailFormItemLayout}>
-          <Button type="primary" htmlType="submit">
-            Register
-          </Button>
-        </Form.Item>
-      </Form>
+          <Form.Item
+            name="email"
+            rules={[
+              {
+                type: 'email',
+                message: 'The input is not valid E-mail!',
+              },
+              {
+                required: true,
+                message: 'Please input your E-mail!',
+              },
+            ]}
+          >
+            <Input placeholder="Email" style={{
+              borderRadius: 50,
+            }}/>
+          </Form.Item>
+
+          <Form.Item
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: 'Please input your password!',
+              },
+            ]}
+            hasFeedback
+          >
+            <Input.Password placeholder="Password" style={{
+              borderRadius: 50,
+            }}/>
+          </Form.Item>
+
+          <Form.Item
+            name="confirm"
+            dependencies={['password']}
+            hasFeedback
+            rules={[
+              {
+                required: true,
+                message: 'Please confirm your password!',
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue('password') === value) {
+                    return Promise.resolve();
+                  }
+
+                  return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                },
+              }),
+            ]}
+          >
+            <Input.Password placeholder="Confirm Password" style={{
+              borderRadius: 50,
+            }}/>
+          </Form.Item>
+
+          <Form.Item {...tailFormItemLayout}>
+            <Button type="primary" shape="round" size={'large'}
+                style={{
+                    marginTop: 30,
+                    paddingRight: 60,
+                    paddingLeft: 60,
+                }}>
+                SUBMIT
+            </Button> 
+          </Form.Item>
+        </Form>
+      </div>
     </div>
   );
 };
