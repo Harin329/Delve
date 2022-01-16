@@ -61,3 +61,28 @@
   padding-left: 20px;
   color: white;
 }
+
+.selectedToggle {
+  background-color: white;
+  color: white;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.unselectedToggle {
+  background-color: #528C6F;
+  border-radius: 30px;
+  padding: 5px;
+}
+
+.selectedToggleText {
+  color: #528C6F;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.unselectedToggleText {
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+}
