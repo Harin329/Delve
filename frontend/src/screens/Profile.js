@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../App.css';
 import { Button, Typography, Layout, Input, List, Card, Row } from 'antd';
 
+import { useNavigate } from 'react-router-dom';
 import back from "../assets/back.png"
 import participant from "../assets/researcher.png"
 
@@ -20,6 +21,11 @@ function Profile() {
     const [userID,SetUserID] = useState(user.uid);
     const [data, setData] = useState([]);
     const [UserResearcher, setUserResearcher] = useState(false);
+
+    const navigate = useNavigate();
+    const backnav = () => {
+        navigate(-1)
+    }
 
     const getAllStudies = (UserResearcher, userID) => {
         try {
@@ -52,7 +58,8 @@ function Profile() {
                             position: 'absolute',
                             backgroundColor: "#FFFFFF",
                             borderColor: "#FFFFFF",
-                            }}> 
+                        }}
+                        onClick={backnav}> 
                     <img src={back} style={{
                             position: 'absolute',
                             left: 50,

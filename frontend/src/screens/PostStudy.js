@@ -5,6 +5,7 @@ import back from '../assets/back.png'
 import plus from '../assets/plus.png'
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+import { useNavigate } from 'react-router-dom';
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import uuid from 'react-uuid'
 import axios from 'axios';
@@ -26,6 +27,8 @@ function PostStudy() {
 
     const storage = getStorage(app)
     const auth = getAuth();
+
+    const navigate = useNavigate();
 
     const [studyID, setStudyID] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
@@ -98,7 +101,7 @@ function PostStudy() {
     return (
         <Layout className='App' style={{ backgroundColor: 'white' }}>
             <img src={back} onClick={() => {
-                window.location.href = '/'
+                navigate(-1)
             }} style={{
                 position: 'absolute',
                 left: 50,
