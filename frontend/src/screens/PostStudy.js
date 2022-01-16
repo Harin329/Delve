@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import { Layout, Input, Space, Popover, Row, Col, Upload, Button, Typography } from 'antd';
+import { Layout, Input, Space, Popover, Row, Col, Button, Typography } from 'antd';
 import back from '../assets/back.png'
 import plus from '../assets/plus.png'
 import { initializeApp } from "firebase/app";
@@ -32,7 +32,7 @@ function PostStudy() {
     const [studyCategory, setStudyCategory] = useState('');
     const [studyDescription, setStudyDescription] = useState('');
     const [studyDirection, setStudyDirection] = useState('');
-    const [isScientific, setIsScientific] = useState(false);
+    const [isScientific, setIsScientific] = useState(true);
     const [requirements, setRequirements] = useState([]);
     const [addRequirement, setAddRequirement] = useState(false);
     const [newReqText, setNewReqText] = useState("");
