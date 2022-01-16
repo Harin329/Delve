@@ -38,13 +38,16 @@ function Study() {
         setStudyID(ID);
 
         getResults(ID);
-    }, [studyID])
+    }, [studyID, isScientific])
 
     function getResults(ID) {
         try {
-            var config = {
+            const url = isScientific
+                ? 'http://localhost:8000/results/' + ID
+                : 'http://localhost:8000/results/' + ID + '/simplified';
+            const config = {
                 method: 'get',
-                url: 'http://localhost:8000/results/' + ID,
+                url: url,
                 headers: {
                     'Content-Type': 'application/json'
                 },
