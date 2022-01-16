@@ -38,7 +38,7 @@ const tailFormItemLayout = {
     },
     sm: {
       span: 16,
-      offset: 8,
+      offset: 6,
     },
   },
 };
@@ -68,12 +68,12 @@ function Signup () {
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: '#528C6F',
-        width: "50%",
+        backgroundColor: '#528B6E',
+        width: "45%",
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <Title> Already have an account? </Title>
+        <Title style={{color: 'white'}}> Already have an account? </Title>
         <Button type="primary" shape="round" size={'large'}
               style={{
                   marginTop: 20,
@@ -81,6 +81,10 @@ function Signup () {
                   paddingLeft: 60,
                   paddingTop: 13,
                   paddingBottom: 35,
+                  backgroundColor: 'white',
+                  color: '#528B6E',
+                  border: 0,
+                  fontWeight: 700,
               }}>
               Log In
           </Button> 
@@ -88,8 +92,7 @@ function Signup () {
       <div style={{
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'beige',
-        width: "50%",
+        width: "55%",
         alignItems: 'center',
         justifyContent: 'center',
       }}>
@@ -116,10 +119,11 @@ function Signup () {
             ]}
           >
             <Input placeholder="Full Name" style={{
-              paddingRight: 300,
+              marginRight: 300,
               borderRadius: 50,
               paddingBottom: 10,
               paddingTop: 10,
+              backgroundColor: 'rgba(82, 139, 110, 0.32)',
             }}/>
           </Form.Item>
 
@@ -140,6 +144,7 @@ function Signup () {
               borderRadius: 50,
               paddingBottom: 10,
               paddingTop: 10,
+              backgroundColor: 'rgba(82, 139, 110, 0.32)',
             }}/>
           </Form.Item>
 
@@ -151,12 +156,17 @@ function Signup () {
                 message: 'Please input your password!',
               },
             ]}
+            style={{
+              
+            }}
             hasFeedback
           >
             <Input.Password placeholder="Password" style={{
               borderRadius: 50,
               paddingBottom: 10,
               paddingTop: 10,
+              backgroundColor: 'rgba(82, 139, 110, 0.32)',
+              
             }}/>
           </Form.Item>
 
@@ -184,19 +194,22 @@ function Signup () {
               borderRadius: 50,
               paddingBottom: 10,
               paddingTop: 10,
+              backgroundColor: 'rgba(82, 139, 110, 0.32)',
             }}/>
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" shape="round" size={'large'}
                 style={{
-                    marginTop: 30,
-                    paddingRight: 60,
-                    paddingLeft: 60,
+                    marginTop: 40,
+                    paddingRight: 100,
+                    paddingLeft: 100,
                     paddingTop: 13,
-                    paddingBottom: 35,
+                    paddingBottom: 40,
+                    fontWeight: 700,
+                    backgroundColor: "#528B6E",
                 }}>
-                Submit
+                Sign Up 
             </Button> 
           </Form.Item>
         </Form>

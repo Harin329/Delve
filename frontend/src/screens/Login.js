@@ -36,7 +36,6 @@ function Login() {
         <div style={{
           display: 'flex',
           flexDirection: 'column',
-          backgroundColor: 'beige',
           width: "55%",
           alignItems: 'center',
           justifyContent: 'center',
@@ -68,6 +67,7 @@ function Login() {
                   borderRadius: 50,
                   paddingBottom: 10,
                   paddingTop: 10,
+                  backgroundColor: 'rgba(82, 139, 110, 0.32)',
                 }}/>
               </Form.Item>
 
@@ -79,19 +79,23 @@ function Login() {
                   borderRadius: 50,
                   paddingBottom: 10,
                   paddingTop: 10,
+                  backgroundColor: 'rgba(82, 139, 110, 0.32)',
                 }}/>
               </Form.Item>
 
-              <Form.Item wrapperCol={{ offset: 7, span: 8}}>
+              <Form.Item wrapperCol={{ offset: 6, span: 8}}>
                 <Button type="primary" 
                         htmlType="submit"
                         shape="round"
                         style={{
-                            marginTop: 30,
-                            paddingRight: 80,
-                            paddingLeft: 80,
-                            paddingTop: 15,
-                            paddingBottom: 35,
+                          marginTop: 40,
+                          paddingRight: 100,
+                          paddingLeft: 100,
+                          paddingTop: 13,
+                          paddingBottom: 40,
+                          fontWeight: 700,
+                          fontSize: 16,
+                          backgroundColor: "#528B6E",
                         }}
                 >
                   Log In
@@ -102,7 +106,7 @@ function Login() {
         <div style={{
           display: 'flex',
           flexDirection: 'column',
-          backgroundColor: '#528C6F',
+          backgroundColor: '#528B6E',
           width: "45%",
           alignItems: 'center',
           justifyContent: 'center',
