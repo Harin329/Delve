@@ -75,6 +75,8 @@ function Signup () {
                   marginTop: 20,
                   paddingRight: 60,
                   paddingLeft: 60,
+                  paddingTop: 13,
+                  paddingBottom: 35,
               }}>
               Log In
           </Button> 
@@ -112,6 +114,8 @@ function Signup () {
             <Input placeholder="Full Name" style={{
               paddingRight: 300,
               borderRadius: 50,
+              paddingBottom: 10,
+              paddingTop: 10,
             }}/>
           </Form.Item>
 
@@ -130,6 +134,8 @@ function Signup () {
           >
             <Input placeholder="Email" style={{
               borderRadius: 50,
+              paddingBottom: 10,
+              paddingTop: 10,
             }}/>
           </Form.Item>
 
@@ -145,6 +151,8 @@ function Signup () {
           >
             <Input.Password placeholder="Password" style={{
               borderRadius: 50,
+              paddingBottom: 10,
+              paddingTop: 10,
             }}/>
           </Form.Item>
 
@@ -170,6 +178,8 @@ function Signup () {
           >
             <Input.Password placeholder="Confirm Password" style={{
               borderRadius: 50,
+              paddingBottom: 10,
+              paddingTop: 10,
             }}/>
           </Form.Item>
 
@@ -179,8 +189,10 @@ function Signup () {
                     marginTop: 30,
                     paddingRight: 60,
                     paddingLeft: 60,
+                    paddingTop: 13,
+                    paddingBottom: 35,
                 }}>
-                SUBMIT
+                Submit
             </Button> 
           </Form.Item>
         </Form>
