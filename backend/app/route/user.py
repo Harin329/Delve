@@ -7,6 +7,7 @@ from app.models.user_model import UserModel
 
 default_user = {
     "user_id": "testID",
+    "is_researcher": False,
     "username": "Test",
     "email": "test@test.com",
 }

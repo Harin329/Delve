@@ -6,7 +6,7 @@ import {
   Button,
   Typography
 } from 'antd';
-
+import axios from 'axios';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 const { Title, Paragraph, Text, Link } = Typography;
@@ -44,7 +44,7 @@ const tailFormItemLayout = {
 };
 
 
-function Signup () {
+function Signup() {
 
   const auth = getAuth();
   const [form] = Form.useForm();
@@ -52,9 +52,25 @@ function Signup () {
   const onFinish = (values) => {
     console.log('Received values of form: ', values);
     createUserWithEmailAndPassword(auth, values.email, values.password)
-    .then((user) => {
-      console.log(user.user.uid);
-      console.log(getAuth().currentUser)
+      .then((user) => {
+        console.log(user.user.uid);
+        console.log(getAuth().currentUser);
+        var config = {
+          method: 'post',
+          url: 'http://localhost:8000/user',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          data: {
+            "user_id": user.user.uid,
+            "is_researcher": false,
+            "username": values.fullname,
+            "email": values.email
+          }
+        };
+        axios(config).then((res) => {
+          console.log(res.data);
+        })
       })
   };
 
@@ -73,21 +89,21 @@ function Signup () {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-        <Title style={{color: 'white'}}> Already have an account? </Title>
+        <Title style={{ color: 'white' }}> Already have an account? </Title>
         <Button type="primary" shape="round" size={'large'}
-              style={{
-                  marginTop: 20,
-                  paddingRight: 60,
-                  paddingLeft: 60,
-                  paddingTop: 13,
-                  paddingBottom: 35,
-                  backgroundColor: 'white',
-                  color: '#528B6E',
-                  border: 0,
-                  fontWeight: 700,
-              }}>
-              Log In
-          </Button> 
+          style={{
+            marginTop: 20,
+            paddingRight: 60,
+            paddingLeft: 60,
+            paddingTop: 13,
+            paddingBottom: 35,
+            backgroundColor: 'white',
+            color: '#528B6E',
+            border: 0,
+            fontWeight: 700,
+          }}>
+          Log In
+        </Button>
       </div>
       <div style={{
         display: 'flex',
@@ -96,9 +112,9 @@ function Signup () {
         alignItems: 'center',
         justifyContent: 'center',
       }}>
-         <Title style={{
-           marginBottom: "8%",
-         }}> Create an Account </Title>
+        <Title style={{
+          marginBottom: "8%",
+        }}> Create an Account </Title>
         <Form
           {...formItemLayout}
           form={form}
@@ -124,7 +140,7 @@ function Signup () {
               paddingBottom: 10,
               paddingTop: 10,
               backgroundColor: 'rgba(82, 139, 110, 0.32)',
-            }}/>
+            }} />
           </Form.Item>
 
           <Form.Item
@@ -145,7 +161,7 @@ function Signup () {
               paddingBottom: 10,
               paddingTop: 10,
               backgroundColor: 'rgba(82, 139, 110, 0.32)',
-            }}/>
+            }} />
           </Form.Item>
 
           <Form.Item
@@ -157,17 +173,17 @@ function Signup () {
               },
             ]}
             style={{
-              
+
             }}
             hasFeedback
           >
-            <Input.Password placeholder="Password" style={{
+            <Input.Password placeholder="Password" bordered={false} style={{
               borderRadius: 50,
               paddingBottom: 10,
               paddingTop: 10,
               backgroundColor: 'rgba(82, 139, 110, 0.32)',
-              
-            }}/>
+
+            }} />
           </Form.Item>
 
           <Form.Item
@@ -190,27 +206,27 @@ function Signup () {
               }),
             ]}
           >
-            <Input.Password placeholder="Confirm Password" style={{
+            <Input.Password placeholder="Confirm Password" bordered={false} style={{
               borderRadius: 50,
               paddingBottom: 10,
               paddingTop: 10,
               backgroundColor: 'rgba(82, 139, 110, 0.32)',
-            }}/>
+            }} />
           </Form.Item>
 
           <Form.Item {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit" shape="round" size={'large'}
-                style={{
-                    marginTop: 40,
-                    paddingRight: 100,
-                    paddingLeft: 100,
-                    paddingTop: 13,
-                    paddingBottom: 40,
-                    fontWeight: 700,
-                    backgroundColor: "#528B6E",
-                }}>
-                Sign Up 
-            </Button> 
+              style={{
+                marginTop: 40,
+                paddingRight: 100,
+                paddingLeft: 100,
+                paddingTop: 13,
+                paddingBottom: 40,
+                fontWeight: 700,
+                backgroundColor: "#528B6E",
+              }}>
+              Sign Up
+            </Button>
           </Form.Item>
         </Form>
       </div>

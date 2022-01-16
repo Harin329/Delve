@@ -4,6 +4,7 @@ import { Layout, Input, Space, Popover, Row, Col, Upload, Button, Typography } f
 import back from '../assets/back.png'
 import plus from '../assets/plus.png'
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
 import uuid from 'react-uuid'
 import axios from 'axios';
@@ -24,6 +25,7 @@ function PostStudy() {
     const app = initializeApp(firebaseConfig);
 
     const storage = getStorage(app)
+    const auth = getAuth();
 
     const [studyID, setStudyID] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
@@ -55,15 +57,15 @@ function PostStudy() {
                     "study_id": studyID,
                     "title": studyTitle,
                     "researchers": [
-                        "Harin",
+                        auth.currentUser.uid,
                     ],
                     "participants": [],
                     "max_participants": 1000,
-                    "contact": "researcher@test.com",
+                    "contact": auth.currentUser.email,
                     "description": studyDescription,
                     "requirements": requirements.join(','),
                     "categories": [
-                        "clinical"
+                        studyCategory
                     ],
                     "status": "open"
                 }
