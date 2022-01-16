@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import '../App.css';
-import { Layout, Input, Space, Popover, Row, Col, Upload, Button, Typography } from 'antd';
+import { Layout, Input, Space, Row, Col, Button, Typography } from 'antd';
 import back from '../assets/back.png'
 import plus from '../assets/plus.png'
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import uuid from 'react-uuid'
 import axios from 'axios';
 
 function PostStudyResults() {
@@ -29,19 +28,18 @@ function PostStudyResults() {
 
     const [studyID, setStudyID] = useState('');
     const [studyTitle, setStudyTitle] = useState('');
-    const [studyCategory, setStudyCategory] = useState('');
-    const [studyDescription, setStudyDescription] = useState('');
-    const [studyDirection, setStudyDirection] = useState('');
-    const [isScientific, setIsScientific] = useState(false);
-    const [requirements, setRequirements] = useState([]);
-    const [addRequirement, setAddRequirement] = useState(false);
-    const [newReqText, setNewReqText] = useState("");
+    const [studyURL, setStudyURL] = useState('');
+    const [studyAbstract, setStudyAbstract] = useState('');
+    const [studyIntroduction, setStudyIntroduction] = useState('');
+    const [studyMethods, setStudyMethods] = useState('');
+    const [studyResults, setStudyResults] = useState('');
+    const [studyDiscussion, setStudyDiscussion] = useState('');
+    const [studyConclusion, setStudyConclusion] = useState('');
+    const [isScientific, setIsScientific] = useState(true);
     const [image, setImage] = useState([]);
 
-    const randomColors = ['#528C6F', '#5088BA', '#C37277', '#EFB943', '#8580CD']
-
     useEffect(() => {
-        setStudyID(uuid());
+        setStudyID(window.location.pathname.split('/')[2]);
     }, [])
 
 
@@ -49,26 +47,25 @@ function PostStudyResults() {
         try {
             var config = {
                 method: 'post',
-                url: 'http://localhost:8000/study',
+                url: 'http://localhost:8000/results',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                data: {
-                    "study_id": studyID,
+                data: 
+                {
+                    "study_id": "abcdefg",
                     "title": studyTitle,
                     "researchers": [
                         auth.currentUser.uid,
                     ],
-                    "participants": [],
-                    "max_participants": 1000,
-                    "contact": auth.currentUser.email,
-                    "description": studyDescription,
-                    "requirements": requirements.join(','),
-                    "categories": [
-                        studyCategory
-                    ],
-                    "status": "open"
-                }
+                    "abstract": studyAbstract,
+                    "intro": studyIntroduction,
+                    "results": studyResults,
+                    "methods": studyMethods,
+                    "discussion": studyDiscussion,
+                    "conclusion": studyConclusion,
+                    "link": studyURL
+                  }
             };
             axios(config).then((res) => {
                 image.forEach((im) => {
@@ -76,7 +73,7 @@ function PostStudyResults() {
                     if (im == null) {
                         return
                     }
-                    const storageRef = ref(storage, `Study/${studyID}/` + im.name)
+                    const storageRef = ref(storage, `StudyResult/${studyID}/` + im.name)
                     uploadBytes(storageRef, im).then((snapshot) => {
                         console.log(snapshot)
                     });
@@ -103,7 +100,7 @@ function PostStudyResults() {
             }} />
             <Space direction="vertical" style={{ padding: '5%', paddingLeft: '10%', paddingRight: '10%' }}>
                 <Row justify='start'>
-                    <Title>Create a Study</Title>
+                    <Title>Publish Your Results</Title>
                 </Row>
                 <Row>
                     <Title level={4}>Title</Title>
@@ -116,12 +113,12 @@ function PostStudyResults() {
                     </Col>
                 </Row>
                 <Row>
-                    <Title level={4}>Category</Title>
+                    <Title level={4}>URL or PDF</Title>
                 </Row>
                 <Row justify='start'>
                     <Col span={24}>
-                        <Input size="large" placeholder="Enter a category..." value={studyCategory} onChange={(text) => {
-                            setStudyCategory(text.target.value)
+                        <Input size="large" placeholder="Enter a category..." value={studyURL} onChange={(text) => {
+                            setStudyURL(text.target.value)
                         }} bordered={false} style={{ marginLeft: -20, marginTop: -30, marginBottom: 30 }} />
                     </Col>
                 </Row>
@@ -136,66 +133,52 @@ function PostStudyResults() {
                     </Row>
                 </Row>
                 <Row>
-                    <Title level={4}>Description</Title>
+                    <Title level={4}>Abstract</Title>
                 </Row>
                 <Row>
-                    <TextArea rows={4} placeholder='Start typing...' value={studyDescription} onChange={(text) => {
-                        setStudyDescription(text.target.value)
+                    <TextArea rows={4} placeholder='Start typing...' value={studyAbstract} onChange={(text) => {
+                        setStudyAbstract(text.target.value)
                     }} bordered={false} style={{ backgroundColor: '#E8E8E8', marginBottom: 30 }} />
                 </Row>
                 <Row>
-                    <Title level={4}>Direction</Title>
+                    <Title level={4}>Introduction</Title>
                 </Row>
                 <Row>
-                    <TextArea rows={4} placeholder='Start typing...' value={studyDirection} onChange={(text) => {
-                        setStudyDirection(text.target.value)
+                    <TextArea rows={4} placeholder='Start typing...' value={studyIntroduction} onChange={(text) => {
+                        setStudyIntroduction(text.target.value)
                     }} bordered={false} style={{ backgroundColor: '#E8E8E8', marginBottom: 30 }} />
                 </Row>
                 <Row>
-                    <Title level={4}>Requirements</Title>
+                    <Title level={4}>Methods</Title>
                 </Row>
-                <Row style={{ marginBottom: 30, marginTop: 10 }}>
-                    {requirements.map((req, index) => {
-                        return (
-                            <Col style={{ width: 70, height: 70 }} onClick={() => {
-                                setRequirements(requirements.filter((r) => { return r !== req }))
-                            }}>
-                                <Row justify='center'>
-                                    <div style={{ backgroundColor: randomColors[index % 5], height: 50, width: 50, borderRadius: 50 }} />
-                                    <Typography style={{ marginTop: 5 }}>{req}</Typography>
-                                </Row>
-                            </Col>
-                        )
-                    })}
-                    <Popover
-                        content={<div>
-                            <Input size="small" placeholder="Enter Requirement" value={newReqText} onChange={(text) => { setNewReqText(text.target.value) }} bordered={false} style={{ marginLeft: -8, marginBottom: 10 }} />
-                            <a onClick={() => {
-                                if (newReqText !== "") {
-                                    setRequirements([...requirements, newReqText])
-                                }
-                                setNewReqText("")
-                                setAddRequirement(false)
-                            }} style={{ color: '#528C6F' }}>Save</a>
-                        </div>}
-                        trigger="click"
-                        visible={addRequirement}
-                    >
-                        <Col style={{ width: 70, height: 70 }}>
-                            <Row justify='center' onClick={() => {
-                                setAddRequirement(true);
-                            }}>
-                                <div style={{ backgroundColor: '#528C6F', height: 50, width: 50, borderRadius: 50 }} />
-                                <img src={plus} style={{
-                                    position: 'absolute',
-                                    right: 0,
-                                    top: 15,
-                                    height: 25,
-                                    width: 25,
-                                }} />
-                            </Row>
-                        </Col>
-                    </Popover>
+                <Row>
+                    <TextArea rows={4} placeholder='Start typing...' value={studyMethods} onChange={(text) => {
+                        setStudyMethods(text.target.value)
+                    }} bordered={false} style={{ backgroundColor: '#E8E8E8', marginBottom: 30 }} />
+                </Row>
+                <Row>
+                    <Title level={4}>Results</Title>
+                </Row>
+                <Row>
+                    <TextArea rows={4} placeholder='Start typing...' value={studyResults} onChange={(text) => {
+                        setStudyResults(text.target.value)
+                    }} bordered={false} style={{ backgroundColor: '#E8E8E8', marginBottom: 30 }} />
+                </Row>
+                <Row>
+                    <Title level={4}>Discussion</Title>
+                </Row>
+                <Row>
+                    <TextArea rows={4} placeholder='Start typing...' value={studyDiscussion} onChange={(text) => {
+                        setStudyDiscussion(text.target.value)
+                    }} bordered={false} style={{ backgroundColor: '#E8E8E8', marginBottom: 30 }} />
+                </Row>
+                <Row>
+                    <Title level={4}>Conclusion</Title>
+                </Row>
+                <Row>
+                    <TextArea rows={4} placeholder='Start typing...' value={studyConclusion} onChange={(text) => {
+                        setStudyConclusion(text.target.value)
+                    }} bordered={false} style={{ backgroundColor: '#E8E8E8', marginBottom: 30 }} />
                 </Row>
                 <Row>
                     <Title level={4}>Upload Images</Title>
@@ -233,7 +216,7 @@ function PostStudyResults() {
                 </Row>
                 <Row justify='center'>
                     <Col span={2}>
-                        <Button type="primary" style={{ backgroundColor: '#528C6F', width: '100%', borderRadius: 20 }} onClick={upload}>Create</Button>
+                        <Button type="primary" style={{ backgroundColor: '#528C6F', width: '100%', borderRadius: 20 }} onClick={upload}>Publish</Button>
                     </Col>
                 </Row>
             </Space>
