@@ -26,7 +26,7 @@ function Profile() {
         try {
             var configUser = {
                 method: 'get',
-                url: 'http://localhost:8000/user/?user_id=' + userID,
+                url: 'http://delve.harinwu.com:8000/user/?user_id=' + userID,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -47,7 +47,7 @@ function Profile() {
         try {
             const config = {
                 method: 'get',
-                url: 'http://localhost:8000/study/?user_id=' + userID + '&is_researcher=' + UserResearcher,
+                url: 'http://delve.harinwu.com:8000/study/?user_id=' + userID + '&is_researcher=' + UserResearcher,
                 headers: {
                     'Content-Type': 'application/json'
                 },

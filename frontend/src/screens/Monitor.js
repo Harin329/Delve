@@ -32,7 +32,7 @@ function Monitor() {
         try {
             var config = {
                 method: 'get',
-                url: 'http://localhost:8000/study/' + ID,
+                url: 'http://delve.harinwu.com:8000/study/' + ID,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -44,7 +44,7 @@ function Monitor() {
                 try {
                     var config = {
                         method: 'get',
-                        url: 'http://localhost:8000/study/' + ID + '/update',
+                        url: 'http://delve.harinwu.com:8000/study/' + ID + '/update',
                         headers: {
                             'Content-Type': 'application/json'
                         },

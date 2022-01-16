@@ -44,7 +44,7 @@ function Study() {
         try {
             var config = {
                 method: 'get',
-                url: 'http://localhost:8000/results/' + ID,
+                url: 'http://delve.harinwu.com:8000/results/' + ID,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -99,7 +99,7 @@ function Study() {
                     try {
                         var configUser = {
                             method: 'get',
-                            url: 'http://localhost:8000/user/?user_id=' + userID,
+                            url: 'http://delve.harinwu.com:8000/user/?user_id=' + userID,
                             headers: {
                                 'Content-Type': 'application/json'
                             },
@@ -126,7 +126,7 @@ function Study() {
         try {
             var config = {
                 method: 'get',
-                url: 'http://localhost:8000/study/' + ID,
+                url: 'http://delve.harinwu.com:8000/study/' + ID,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -163,7 +163,7 @@ function Study() {
                 try {
                     var configUser = {
                         method: 'get',
-                        url: 'http://localhost:8000/user/?user_id=' + userID,
+                        url: 'http://delve.harinwu.com:8000/user/?user_id=' + userID,
                         headers: {
                             'Content-Type': 'application/json'
                         },
@@ -192,7 +192,7 @@ function Study() {
             try {
                 var config = {
                     method: 'post',
-                    url: 'http://localhost:8000/study/' + studyID + '/join?participant_id=' + auth.currentUser.uid,
+                    url: 'http://delve.harinwu.com:8000/study/' + studyID + '/join?participant_id=' + auth.currentUser.uid,
                     headers: {
                         'Content-Type': 'application/json'
                     },
